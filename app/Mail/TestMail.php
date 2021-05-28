@@ -29,6 +29,8 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Test Mail from Haven of wisdom Academy')->view('partials.email.email');
+        return $this->subject('Test Mail from Haven of wisdom Academy')
+        ->view('partials.email.email')
+        ->from('havenowisdom@gmail.com');
     }
 }

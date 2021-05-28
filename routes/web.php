@@ -4,6 +4,9 @@ use App\Http\Controllers\FullCalenderController;
 
 Auth::routes();
 
+
+Route::get('/guest', 'SupportTeam\GuestController@homepage')->name('guest');
+Route::get('/guest/register', 'SupportTeam\GuestController@registration')->name('registration');
 //Route::get('/test', 'TestController@index')->name('test');
 Route::get('/privacy-policy', 'HomeController@privacy_policy')->name('privacy_policy');
 Route::get('/terms-of-use', 'HomeController@terms_of_use')->name('terms_of_use');

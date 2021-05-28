@@ -57,8 +57,8 @@ class StudentRecordController extends Controller
        $sr =  $req->only(Qs::getStudentData());
 
         $ct = $this->my_class->findTypeByClass($req->my_class_id)->code;
-        $ct = ($ct == 'J') ? 'JSS' : $ct;
-        $ct = ($ct == 'S') ? 'SS' : $ct;
+        $ct = ($ct == 'J') ? 'JHS' : $ct;
+        $ct = ($ct == 'S') ? 'SHS' : $ct;
 
         $data['user_type'] = 'student';
         $data['name'] = ucwords($req->name);
@@ -74,6 +74,17 @@ class StudentRecordController extends Controller
             $f['path'] = $photo->storeAs(Qs::getUploadPath('student').$data['code'], $f['name']);
             $data['photo'] = asset('storage/' . $f['path']);
         }
+        $mail =$data['email'];
+
+
+        $details = [
+            'title' => 'Mail from Haven of Wisdom',
+            'body' => 'Kindly login using your email with your password as: student',
+        ];
+        Mail::to($mail)->send(new TestMail($details));
+
+
+
 
         $user = $this->user->create($data); // Create User
 
@@ -81,11 +92,6 @@ class StudentRecordController extends Controller
         $sr['user_id'] = $user->id;
         $sr['session'] = Qs::getSetting('current_session');
 
-        // $details = [
-        //     'title' => 'Mail from Haven of Wisdom',
-        //     'body' => 'Kindly login using your email with your password as: student',
-        // ];
-        // Mail::to($data['email'])->send(new TestMail($details));
         $this->student->createRecord($sr); // Create Student
         return Qs::jsonStoreOk();
     }

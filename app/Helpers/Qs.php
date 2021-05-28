@@ -7,6 +7,8 @@ use App\Models\StudentRecord;
 use App\Models\Subject;
 use Hashids\Hashids;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
 
 class Qs
 {
@@ -87,7 +89,7 @@ class Qs
 
     public static function getUserRecord($remove = [])
     {
-        $data = ['name', 'email', 'phone', 'phone2', 'dob', 'gender', 'address', 'bg_id', 'nal_id', 'state_id', 'lga_id'];
+        $data = ['name', 'email', 'phone', 'phone2', 'dob', 'gender', 'address'];
 
         return $remove ? array_values(array_diff($data, $remove)) : $data;
     }
@@ -314,6 +316,15 @@ class Qs
     public static function jsonStoreOk()
     {
         return self::json(__('msg.store_ok'));
+    }
+
+    public static function sendEmail($remove = [])
+    {
+        $data = ['email'];
+
+        return $remove ? array_values(array_diff($data, $remove)) : $data;
+
+
     }
 
     public static function jsonUpdateOk()
