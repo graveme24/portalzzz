@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
 
 class StudentRecordController extends Controller
 {
@@ -79,6 +81,11 @@ class StudentRecordController extends Controller
         $sr['user_id'] = $user->id;
         $sr['session'] = Qs::getSetting('current_session');
 
+        // $details = [
+        //     'title' => 'Mail from Haven of Wisdom',
+        //     'body' => 'Kindly login using your email with your password as: student',
+        // ];
+        // Mail::to($data['email'])->send(new TestMail($details));
         $this->student->createRecord($sr); // Create Student
         return Qs::jsonStoreOk();
     }
