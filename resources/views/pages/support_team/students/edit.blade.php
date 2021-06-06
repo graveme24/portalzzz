@@ -148,7 +148,7 @@
                             <div class="form-group">
                                 <label for="section_id">Section: </label>
                                 <select name="section_id" required id="section_id" class="form-control select" data-placeholder="Select Section">
-                                    <option value="{{ $sr->section_id }}">{{ $sr->section->name }}</option>
+                                    <option {{ (old('section_id')) ? 'selected' : '' }} value="{{ old('section_id') }}">{{ (old('section_id')) ? 'Selected' : '' }}</option>
                                 </select>
                             </div>
                         </div>

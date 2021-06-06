@@ -7,13 +7,11 @@ Auth::routes();
 
 Route::get('/guest', 'SupportTeam\GuestController@homepage')->name('guest');
 Route::get('/guest/register', 'SupportTeam\GuestController@registration')->name('registration');
+Route::post('/guest/store', 'SupportTeam\GuestController@create')->name('guest.create');
 //Route::get('/test', 'TestController@index')->name('test');
 Route::get('/privacy-policy', 'HomeController@privacy_policy')->name('privacy_policy');
 Route::get('/terms-of-use', 'HomeController@terms_of_use')->name('terms_of_use');
-Route::get('/guest', function()
-    {
-        return view('pages.guest.homepage');
-    });
+
 
 
 
@@ -41,7 +39,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'students'], function(){
             Route::get('reset_pass/{st_id}', 'StudentRecordController@reset_pass')->name('st.reset_pass');
             Route::get('graduated', 'StudentRecordController@graduated')->name('students.graduated');
+            Route::get('toapprove', 'StudentRecordController@toapprove')->name('students.toapprove');
             Route::put('not_graduated/{id}', 'StudentRecordController@not_graduated')->name('st.not_graduated');
+            Route::post('/student-upload'. 'SupportTeam\UploadController@upload')->name('student.upload');
             Route::get('list/{class_id}', 'StudentRecordController@listByClass')->name('students.list');
 
             /* Promotions */

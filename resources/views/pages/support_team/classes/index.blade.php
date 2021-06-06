@@ -28,7 +28,7 @@
                             <tbody>
                             @foreach($my_classes as $c)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $c->id }}</td>
                                     <td>{{ $c->name }}</td>
                                     <td>{{ $c->class_type->name }}</td>
                                     <td class="text-center">

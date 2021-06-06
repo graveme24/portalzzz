@@ -17,8 +17,8 @@
                             <div class="form-group">
                                 <label>Full Name: <span class="text-danger">*</span></label>
                                 <input value="{{ old('name') }}" required type="text" name="name" placeholder="Full Name" class="form-control">
-                                </div>
                             </div>
+                        </div>
 
                         <div class="col-md-6">
                             <div class="form-group">

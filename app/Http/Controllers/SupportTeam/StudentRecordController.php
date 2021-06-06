@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
+use App\Models\StudentRecord;
 
 class StudentRecordController extends Controller
 {
@@ -74,17 +75,13 @@ class StudentRecordController extends Controller
             $f['path'] = $photo->storeAs(Qs::getUploadPath('student').$data['code'], $f['name']);
             $data['photo'] = asset('storage/' . $f['path']);
         }
-        $mail =$data['email'];
-
+        $mail = $data['email'];
 
         $details = [
             'title' => 'Mail from Haven of Wisdom',
             'body' => 'Kindly login using your email with your password as: student',
         ];
         Mail::to($mail)->send(new TestMail($details));
-
-
-
 
         $user = $this->user->create($data); // Create User
 
@@ -112,6 +109,14 @@ class StudentRecordController extends Controller
 
         return view('pages.support_team.students.graduated', $data);
     }
+
+    public function toapprove()
+    {
+        $not = StudentRecord::whereNull('my_class_id')->get();
+
+        return view('pages.support_team.students.toapprove', compact('not'));
+    }
+
 
     public function not_graduated($sr_id)
     {
@@ -146,9 +151,9 @@ class StudentRecordController extends Controller
         $data['sr'] = $this->student->getRecord(['id' => $sr_id])->first();
         $data['my_classes'] = $this->my_class->all();
         $data['parents'] = $this->user->getUserByType('parent');
-        $data['dorms'] = $this->student->getAllDorms();
-        $data['states'] = $this->loc->getStates();
-        $data['nationals'] = $this->loc->getAllNationals();
+        // $data['dorms'] = $this->student->getAllDorms();
+        // $data['states'] = $this->loc->getStates();
+        // $data['nationals'] = $this->loc->getAllNationals();
         return view('pages.support_team.students.edit', $data);
     }
 
