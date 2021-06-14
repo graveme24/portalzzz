@@ -17,7 +17,7 @@ class FullCalenderController extends Controller
                        ->get(['id', 'title', 'start', 'end']);
             return response()->json($data);
     	}
-    	return view('pages.admin.dashboard');
+    	return view('pages.support_team.dashboard');
     }
 
     public function action(Request $request)
@@ -53,6 +53,12 @@ class FullCalenderController extends Controller
     			return response()->json($event);
     		}
     	}
+    }
+
+    public function getEvents(){
+        $events = Event::all();
+
+        return view('pages.support_team.dashboard', $events);
     }
 }
 ?>

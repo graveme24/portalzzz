@@ -1,147 +1,147 @@
-@extends('layouts.login_master')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Haven Of Wisdom Academy</title>
 
+        <!-- Meta-Tags -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+        <meta name="keywords" content="">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script>
+            addEventListener("load", function() {
+                setTimeout(hideURLbar, 0);
+            }, false);
+
+            function hideURLbar() {
+                window.scrollTo(0, 1);
+            }
+        </script>
+        <link href=" {{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('global_assets/css/icons/icomoon/styles.css') }}" rel="stylesheet" type="text/css">
+        <link href=" {{ asset('assets/css/bootstrap_limitless.min.css') }}" rel="stylesheet" type="text/css">
+        <script src="{{ asset('global_assets/js/main/jquery.min.js') }} "></script>
+        <script src="{{ asset('global_assets/js/main/bootstrap.bundle.min.js') }} "></script>
+
+
+        <link rel="icon" href="{{ asset('global_assets/images/favicon.png') }}">
+        <!-- //Meta-Tags -->
+        <!-- Index-Page-CSS -->
+        <link rel="stylesheet" href="css1/style.css" type="text/css" media="all">
+        <!-- //Custom-Stylesheet-Links -->
+        <!--fonts -->
+        <!-- //fonts -->
+        <link rel="stylesheet" href="css1/font-awesome.min.css" type="text/css" media="all">
+        <!-- //Font-Awesome-File-Links -->
+
+        <!-- Google fonts -->
+        <link href="//fonts.googleapis.com/css?family=Quattrocento+Sans:400,400i,700,700i" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Mukta:200,300,400,500,600,700,800" rel="stylesheet">
+        <!-- Google fonts -->
+</head>
+
+<body>
 @section('content')
-<div class="content-wrapper">
-<div class="container content d-flex justify-content-center align-items-center">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card-group">
-          <div class="card p-4">
-            <div class="card-body">
-                <div class="text-center mb-3">
-                    <i class=""><img src="{{URL::asset('/image/HWA.jpg')}}" width="100px" height="100px"></i>
-                    <h5 class="mb-0">Login to your account</h5>
-                    <span class="d-block text-muted">Your credentials</span>
+    <section class="main">
+        <div class="layer1">
+
+            <div class="bottom-grid">
+                <div class="logo">
+                    <h1> <a href="/login"> Haven of Wisdom Academy</a></h1>
                 </div>
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-styled-left alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                        <span class="font-weight-semibold">Oops!</span> {{ implode('<br>', $errors->all()) }}
-                    </div>
-                @endif
-              <p class="text-muted">Sign In to your account</p>
-              <form method="POST" action="{{ route('login') }}">
-                  @csrf
-                  <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                      <i class="icon-user"></i>
-                      </span>
-                  </div>
-                  <input type="text" class="form-control" name="identity" value="{{ old('identity') }}" placeholder="Login ID or Email">
-                  @error('email')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
-                  </div>
-                  <div class="input-group mb-4">
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                      <i class="icon-lock"></i>
-                      </span>
-                  </div>
-                  <input required name="password" type="password" class="form-control" placeholder="{{ __('Password') }}">
-                  @error('password')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-6">
-                        <button type="submit" class="btn btn-primary btn-block">Sign in <i class="icon-circle-right2 ml-2"></i></button>
-                    </div>
-                  </form>
-                  <div class="col-6 text-right">
-                    <a href="{{ route('password.request') }}" class="ml-auto">Forgot password?</a>
-                  </div>
-                  </div>
-            </div>
-          </div>
-          <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
-            <div class="card-body text-center">
-              <div>
-                {{-- <h2>Sign up</h2> --}}
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <div class="form-group">
-                    <a href="{{ route('guest') }}" class="btn btn-light btn-block"><i class="icon-home"></i> Back to Home</a>
+                <div class="links">
+                    <ul class="links-unordered-list">
+
+                        <li class="active">
+                            <a href="/guest" class="">Home</a>
+                        </li>
+
+                    </ul>
                 </div>
-                {{-- @if (Route::has('password.request'))
-                  <a href="{{ route('register') }}" class="btn btn-primary active mt-3" type="button">{{ __('Register') }}</a>
-                @endif --}}
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            <div class="content-w3ls">
+                <div class="text-center icon" >
+                    <img src="global_assets/images/HWA.jpg" style="border-radius: 150px;" width="150">
 
-  </div>
-</div>
-    {{-- <div class="page-content login-cover">
-
-        <!-- Main content -->
-        <div class="content-wrapper">
-
-            <!-- Content area -->
-            <div class="content d-flex justify-content-center align-items-center">
-
-                <!-- Login card -->
-                <form class="login-form " method="post" action="{{ route('login') }}">
-                    @csrf
-                    <div class="card mb-0">
-                        <div class="card-body">
-                            <div class="text-center mb-3">
-                                <i class=""><img src="{{URL::asset('/image/HWA.jpg')}}" width="100px" height="100px"></i>
-                                <h5 class="mb-0">Login to your account</h5>
-                                <span class="d-block text-muted">Your credentials</span>
-                            </div>
-
-                                @if ($errors->any())
+                </div>
+                <div class="content-bottom">
+                    <form class="login-form" action="{{ route('login') }}" method="post">
+                        @csrf
+                        @if ($errors->any())
                                 <div class="alert alert-danger alert-styled-left alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
                                     <span class="font-weight-semibold">Oops!</span> {{ implode('<br>', $errors->all()) }}
                                 </div>
-                                @endif
-
-
-                            <div class="form-group ">
-                                <input type="text" class="form-control" name="identity" value="{{ old('identity') }}" placeholder="Login ID or Email">
+                         @endif
+                         @if (\Session::has('wait'))
+                            <div class="alert alert-danger alert-styled-left alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                                <ul>
+                                    <span class="font-weight-semibold">Oops!</span><li>{!! \Session::get('wait') !!}</li>
+                                </ul>
                             </div>
-
-                            <div class="form-group ">
-                                <input required name="password" type="password" class="form-control" placeholder="{{ __('Password') }}">
-
+                        @endif
+                                                <div class="field-group">
+                            <span class="fa fa-user" aria-hidden="true"></span>
+                            <div class="wthree-field">
+                                <input type="text" class="form-control" name="identity" value="{{ old('identity') }}" placeholder="Login ID or Email" autocomplete="off">
                             </div>
-
-                            <div class="form-group d-flex align-items-center">
-                                <div class="form-check mb-0">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" name="remember" class="form-input-styled" {{ old('remember') ? 'checked' : '' }} data-fouc>
-                                        Remember
-                                    </label>
-                                </div>
-
-                                <a href="{{ route('password.request') }}" class="ml-auto">Forgot password?</a>
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block">Sign in <i class="icon-circle-right2 ml-2"></i></button>
-                            </div>
-
-
-
-
                         </div>
-                    </div>
-                </form>
+                        <div class="field-group">
+                            <span class="fa fa-lock" aria-hidden="true"></span>
+                            <div class="wthree-field">
+                                <input required name="password" type="password" class="form-control" placeholder="{{ __('Password') }}">
+                            </div>
+                        </div>
+                        <div class="wthree-field">
+                            <button type="submit" class="btn">Login</button>
+                        </div>
+                        <ul class="list-login">
+                            <li class="switch-agileits">
+                                <label class="switch">
+                                    <input type="checkbox" name="remember" class="form-input-styled" {{ old('remember') ? 'checked' : '' }} data-fouc>
+								<span class="slider round"></span>
+								Remember me
+							</label>
+                            </li>
+                            <li>
+                                <a href="{{ route('password.request') }}" class="ml-auto">Forgot password?</a>
+                            </li>
+                            <li class="clearfix"></li>
+                        </ul>
+                        <ul class="list-login-bottom"style="text-align:center;">
 
+                            <li class=""  >
+                                <a href="#" class="text-right">Need Help?</a>
+                            </li>
+                            <li class="clearfix"></li>
+                        </ul>
+                    </form>
+                </div>
             </div>
+            <div class="bottom-grid1">
+                <div class="links">
+                    <ul class="links-unordered-list">
+                        <li class="active">
+                            <a href="#" class="">About Us</a>
+                        </li>
+                        <li class="active">
+                            <a href="#" class="">Privacy Policy</a>
+                        </li>
+                        <li class="active">
+                            <a href="#" class="">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="copyright">
 
-
+                </div>
+            </div>
         </div>
+    </section>
 
-    </div> --}}
-    @endsection
+</body>
+<!-- //Body -->
+
+</html>
 

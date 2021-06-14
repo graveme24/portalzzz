@@ -13,12 +13,12 @@ class CreateFks extends Migration
         //     $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
         // });
 
-        Schema::table('users', function (Blueprint $table) {
-            // $table->foreign('state_id')->references('id')->on('states')->onDelete('set null');
-            // $table->foreign('lga_id')->references('id')->on('lgas')->onDelete('set null');
-            $table->foreign('bg_id')->references('id')->on('blood_groups')->onDelete('set null');
-            // $table->foreign('nal_id')->references('id')->on('nationalities')->onDelete('set null');
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->foreign('state_id')->references('id')->on('states')->onDelete('set null');
+        //     $table->foreign('lga_id')->references('id')->on('lgas')->onDelete('set null');
+        //     $table->foreign('bg_id')->references('id')->on('blood_groups')->onDelete('set null');
+        //     $table->foreign('nal_id')->references('id')->on('nationalities')->onDelete('set null');
+        // });
 
         Schema::table('my_classes', function (Blueprint $table) {
             $table->foreign('class_type_id')->references('id')->on('class_types')->onDelete('set null');
@@ -36,8 +36,8 @@ class CreateFks extends Migration
 
         Schema::table('student_records', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('my_class_id')->references('id')->on('my_classes')->onDelete('cascade')->nullable();
-            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade')->nullable();
+            $table->foreign('my_class_id')->references('id')->on('my_classes')->onDelete('cascade');
+            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
             $table->foreign('my_parent_id')->references('id')->on('users')->onDelete('set null');
             // $table->foreign('dorm_id')->references('id')->on('dorms')->onDelete('set null');
         });

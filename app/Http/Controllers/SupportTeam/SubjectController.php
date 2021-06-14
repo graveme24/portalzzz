@@ -53,7 +53,7 @@ class SubjectController extends Controller
         $data = $req->all();
         $this->my_class->updateSubject($id, $data);
 
-        return Qs::jsonUpdateOk();
+        return back()->with('flash_success', __('msg.update_ok'));
     }
 
     public function destroy($id)

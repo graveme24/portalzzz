@@ -38,7 +38,7 @@ class Qs
 
     public static function getPanelOptions()
     {
-        return '    <div class="header-elements">
+        return '    <div class="header-elements" >
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
                         <a class="list-icons-item" data-action="remove"></a>
@@ -49,7 +49,7 @@ class Qs
     public static function displaySuccess($msg)
     {
         return '
- <div class="alert alert-success alert-bordered">
+                <div class="alert alert-success alert-bordered">
                     <button type="button" class="close" data-dismiss="alert"><span>&times;</span><span class="sr-only">Close</span></button> '.
         $msg.'  </div>
                 ';
@@ -72,7 +72,22 @@ class Qs
 
     public static function getTeamAcademic()
     {
+        return ['admin', 'super_admin', 'teacher'];
+    }
+
+    public static function getTeamAcademics()
+    {
         return ['admin', 'super_admin', 'teacher', 'student'];
+    }
+
+    public static function getTeamAcademic1()
+    {
+        return ['admin', 'super_admin', 'teacher', 'parent'];
+    }
+
+    public static function getTeamView()
+    {
+        return ['parent', 'teacher', 'student'];
     }
 
     public static function getTeamAdministrative()
@@ -82,17 +97,18 @@ class Qs
 
     public static function hash($id)
     {
-        $date = date('dMY').'CJ';
+        $date = date('dMY').'HWA';
         $hash = new Hashids($date, 14);
         return $hash->encode($id);
     }
 
     public static function getUserRecord($remove = [])
     {
-        $data = ['name', 'email', 'phone', 'phone2', 'dob', 'gender', 'address'];
+        $data = ['name', 'email', 'phone', 'dob', 'gender', 'address', 'phone2', 'pob', 'citizenship', 'mname', 'mage', 'moccu', 'fname', 'fage', 'foccu', 'gname', 'grel', 'rel' ];
 
         return $remove ? array_values(array_diff($data, $remove)) : $data;
     }
+
 
     public static function getStaffRecord($remove = [])
     {
@@ -103,7 +119,15 @@ class Qs
 
     public static function getStudentData($remove = [])
     {
-        $data = ['my_class_id', 'section_id', 'my_parent_id', 'dorm_id', 'dorm_room_no', 'year_admitted', 'house', 'age'];
+        $data = ['my_class_id', 'section_id', 'my_parent_id', 'year_admitted', 'age', 'adm_no', 'status'];
+
+        return $remove ? array_values(array_diff($data, $remove)) : $data;
+
+    }
+
+    public static function getGuestData($remove = [])
+    {
+        $data = ['year_admitted', 'age', 'adm_no'];
 
         return $remove ? array_values(array_diff($data, $remove)) : $data;
 
@@ -111,7 +135,7 @@ class Qs
 
     public static function decodeHash($str, $toString = true)
     {
-        $date = date('dMY').'CJ';
+        $date = date('dMY').'HWA';
         $hash = new Hashids($date, 14);
         $decoded = $hash->decode($str);
         return $toString ? implode(',', $decoded) : $decoded;
@@ -127,6 +151,11 @@ class Qs
         return in_array(Auth::user()->user_type, self::getTeamSA());
     }
 
+    public static function userIsViewOnly()
+    {
+        return in_array(Auth::user()->user_type, self::getTeamView());
+    }
+
     public static function userIsTeamSAT()
     {
         return in_array(Auth::user()->user_type, self::getTeamSAT());
@@ -136,6 +165,16 @@ class Qs
     {
         return in_array(Auth::user()->user_type, self::getTeamAcademic());
     }
+    public static function userIsAcademics()
+    {
+        return in_array(Auth::user()->user_type, self::getTeamAcademic());
+    }
+
+    public static function userIsAcademic1()
+    {
+        return in_array(Auth::user()->user_type, self::getTeamAcademic1());
+    }
+
 
     public static function userIsAdministrative()
     {
@@ -162,6 +201,11 @@ class Qs
         return Auth::user()->user_type == 'student';
     }
 
+    public static function userIsGuest()
+    {
+        return Auth::user()->user_type == 'guest';
+    }
+
     public static function userIsTeacher()
     {
         return Auth::user()->user_type == 'teacher';
@@ -179,13 +223,13 @@ class Qs
 
     public static function getStaff($remove=[])
     {
-        $data =  ['super_admin', 'admin', 'teacher', 'accountant', 'librarian'];
+        $data =  ['super_admin', 'admin', 'teacher'];
         return $remove ? array_values(array_diff($data, $remove)) : $data;
     }
 
     public static function getAllUserTypes($remove=[])
     {
-        $data =  ['super_admin', 'admin', 'teacher', 'accountant', 'librarian', 'student', 'parent'];
+        $data =  ['super_admin', 'admin', 'teacher', 'student', 'parent'];
         return $remove ? array_values(array_diff($data, $remove)) : $data;
     }
 
@@ -213,7 +257,7 @@ class Qs
 
     public static function getPTA()
     {
-        return ['super_admin', 'admin', 'teacher', 'parent'];
+        return ['super_admin', 'admin', 'teacher', 'parent', 'student'];
     }
 
     /*public static function filesToUpload($programme)
@@ -300,10 +344,8 @@ class Qs
        switch($class_type){
            case 'J' : return 'junior';
            case 'S' : return 'senior';
-           case 'N' : return 'nursery';
            case 'P' : return 'primary';
-           case 'PN' : return 'pre_nursery';
-           case 'C' : return 'creche';
+           case 'K' : return 'preschool';
        }
         return $class_type;
     }
@@ -318,20 +360,15 @@ class Qs
         return self::json(__('msg.store_ok'));
     }
 
-    public static function sendEmail($remove = [])
-    {
-        $data = ['email'];
-
-        return $remove ? array_values(array_diff($data, $remove)) : $data;
-
-
-    }
-
     public static function jsonUpdateOk()
     {
         return self::json(__('msg.update_ok'));
     }
 
+    public static function jsonLogout()
+    {
+        return self::json(__('msg.update_ok'));
+    }
     public static function storeOk($routeName)
     {
         return self::goWithSuccess($routeName, __('msg.store_ok'));

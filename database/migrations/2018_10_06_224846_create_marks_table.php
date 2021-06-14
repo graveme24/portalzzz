@@ -29,6 +29,7 @@ class CreateMarksTable extends Migration
             $table->integer('tex1')->nullable();
             $table->integer('tex2')->nullable();
             $table->integer('tex3')->nullable();
+            $table->integer('tex4')->nullable();
             $table->tinyInteger('sub_pos')->nullable();
             $table->integer('cum')->nullable();
             $table->string('cum_ave')->nullable();

@@ -45,6 +45,11 @@ class MyClassRepo
         return ClassType::orderBy('name', 'asc')->get();
     }
 
+    public function getTypeSorted()
+    {
+        return ClassType::orderBy('id')->get();
+    }
+
     public function findType($class_type_id)
     {
         return ClassType::find($class_type_id);

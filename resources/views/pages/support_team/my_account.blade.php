@@ -61,7 +61,7 @@
                                     <div class="form-group row">
                                         <label for="name" class="col-lg-3 col-form-label font-weight-semibold">Name</label>
                                         <div class="col-lg-9">
-                                            <input disabled="disabled" id="name" class="form-control" type="text" value="{{ $my->name }}">
+                                            <input  disabled="disabled" id="name" name="name" class="form-control" type="text" value="{{ $my->name }}">
                                         </div>
                                     </div>
 
@@ -69,7 +69,7 @@
                                         <div class="form-group row">
                                             <label for="username" class="col-lg-3 col-form-label font-weight-semibold">Username</label>
                                             <div class="col-lg-9">
-                                                <input disabled="disabled" id="username" class="form-control" type="text" value="{{ $my->username }}">
+                                                <input id="username" disabled="disabled" class="form-control" type="text" value="{{ $my->username }}">
                                             </div>
                                         </div>
 
@@ -97,12 +97,12 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
+                                    {{-- <div class="form-group row">
                                         <label for="phone2" class="col-lg-3 col-form-label font-weight-semibold">Telephone </label>
                                         <div class="col-lg-9">
                                             <input id="phone2" value="{{ $my->phone2 }}" name="phone2"  type="text" class="form-control" >
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="form-group row">
                                         <label for="address" class="col-lg-3 col-form-label font-weight-semibold">Address </label>

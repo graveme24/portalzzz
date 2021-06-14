@@ -122,16 +122,16 @@ class ExamRepo
 
     /*********** Skills ***************/
 
-    public function getSkill($where)
-    {
-        return Skill::where($where)->orderBy('name')->get();
-    }
+    // public function getSkill($where)
+    // {
+    //     return Skill::where($where)->orderBy('name')->get();
+    // }
 
-    public function getSkillByClassType($class_type, $skill_type = NULL)
-    {
-        return $skill_type
-            ? $this->getSkill(['class_type' => $class_type, 'skill_type' => $skill_type])
-            : $this->getSkill(['class_type' => $class_type]);
-    }
+    // public function getSkillByClassType($class_type, $skill_type = NULL)
+    // {
+    //     return $skill_type
+    //         ? $this->getSkill(['class_type' => $class_type, 'skill_type' => $skill_type])
+    //         : $this->getSkill(['class_type' => $class_type]);
+    // }
 
 }

@@ -39,7 +39,7 @@ class Mk extends Qs
 
         $tex = 'tex'.$term;
         $sub_total = Mark::where($d)->select($tex)->get()->where($tex, '>', 0);
-        return $sub_total->count() > 0 ? $sub_total->first()->$tex : '-';
+        return $sub_total->count() > 0 ? $sub_total->first()->$tex : 'N/A';
     }
 
     public static function countDistinctions(Collection $marks)
@@ -92,14 +92,14 @@ class Mk extends Qs
         $exam = self::getExamByTerm($term, $year);
         $d = ['exam_id' => $exam->id, 'student_id' => $st_id, 'year' => $year];
 
-        if($term < 3){
+        if($term < 4){
             $exr = ExamRecord::where($d);
             $avg = $exr->first()->ave ?: NULL;
             return $avg > 0 ? round($avg, 1) : $avg;
         }
 
-        $mk = Mark::where($d)->whereNotNull('tex3');
-        $avg = $mk->select('tex3')->avg('tex3');
+        $mk = Mark::where($d)->whereNotNull('tex4');
+        $avg = $mk->select('tex4')->avg('tex4');
         return round($avg, 1);
     }
 
@@ -108,12 +108,12 @@ class Mk extends Qs
         $exam = self::getExamByTerm($term, $year);
         $d = ['exam_id' => $exam->id, 'student_id' => $st_id, 'year' => $year];
 
-        if($term < 3){
+        if($term < 4){
             return ExamRecord::where($d)->first()->total ?? NULL;
         }
 
-        $mk = Mark::where($d)->whereNotNull('tex3');
-        return $mk->select('tex3')->sum('tex3');
+        $mk = Mark::where($d)->whereNotNull('tex4');
+        return $mk->select('tex4')->sum('tex4');
     }
 
     public static function getExamByTerm($term, $year)

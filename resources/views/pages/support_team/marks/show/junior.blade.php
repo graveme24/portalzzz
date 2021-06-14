@@ -12,66 +12,73 @@
             <table class="table table-bordered table-responsive text-center">
                 <thead>
                 <tr>
-                    <th rowspan="2">SUBJECTS</th>
-                    <th colspan="4">CONTINUOUS ASSESSMENT</th>
-                    <th rowspan="2">EXAM (60)</th>
-            @if($ex->term < 3) {{-- 1st & 2nd Term--}}
-                    <th rowspan="2">FINAL MARKS <br> (100%)</th>
-                    <th rowspan="2">GRADE</th>
-                    <th rowspan="2">SUBJECT <br> POSITION</th>
+                    <th rowspan="2">S/N</th>
+                    <th rowspan="2">SUBJECT CODE</th>
+                    <th rowspan="2">DESCRIPTION</th>
+                    {{-- <th>CA1(10)</th>
+                    <th>CA2(10)</th>
+                    <th>MID(20)</th> --}}
+                    {{-- <th>TOTAL(40)</th> --}}
+                    {{-- <th rowspan="2">EXAM (60)</th> --}}
+            @if($ex->term < 4) {{-- 1st, 2nd & 3rd Term--}}
+                    <th rowspan="2">FINAL GRADE</th>
+                    {{-- <th rowspan="2">SUBJECT <br> POSITION</th> --}}
             @endif
-            @if($ex->term == 3) {{-- 3rd Term --}}
-                <th rowspan="2">FINAL MARKS <br>(100%) 3<sup>RD</sup> TERM</th>
-                    <th rowspan="2">1<sup>ST</sup> <br> TERM</th>
-                    <th rowspan="2">2<sup>ND</sup> <br> TERM</th>
-                    <th rowspan="2">CUM (300%) <br> 1<sup>ST</sup> + 2<sup>ND</sup> + 3<sup>RD</sup></th>
-                    <th rowspan="2">CUM AVE</th>
-                    <th rowspan="2">GRADE</th>
+            @if($ex->term == 4) {{-- 4th Term --}}
+                    <th rowspan="2">1<sup>ST</sup> TERM</th>
+                    <th rowspan="2">2<sup>ND</sup> TERM</th>
+                    <th rowspan="2">3<sup>RD</sup> TERM</th>
+                    <th rowspan="2">4<sup>TH</sup> TERM</th>
+                    <th rowspan="2">TOTAL (400%) <br> 1<sup>ST</sup> + 2<sup>ND</sup> + 3<sup>RD</sup> + 4<sup>TH</th>
+                    <th rowspan="2">TOTAL AVE</th>
+                    {{-- <th rowspan="2">GRADE</th> --}}
             @endif
                     <th rowspan="2">REMARKS</th>
-                </tr>
-                <tr>
-                    <th>CA1(10)</th>
-                    <th>MID(20)</th>
-                    <th>CA2(10)</th>
-                    <th>TOTAL(40)</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($subjects as $sub)
                     <tr>
-                        <td>{{ $sub->name }}</td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td style="font-weight: bold">{{ $sub->slug }}</td>
+                        <td style="font-weight: bold">{{ $sub->name }}</td>
                     @foreach($marks->where('subject_id', $sub->id)->where('exam_id', $ex->id) as $mk)
-                        <td>{{ $mk->t1 ?: '-' }}</td>
-                        <td>{{ $mk->t2 ?: '-' }}</td>
-                        <td>{{ $mk->t3 ?: '-' }}</td>
+                        {{-- <td>{{ $mk->t1 ?: 'N/A' }}</td>
+                        <td>{{ $mk->t2 ?: 'N/A' }}</td>
+                        <td>{{ $mk->t3 ?: 'N/A' }}</td>
                         <td>{{ $mk->tca ?: '-' }}</td>
-                        <td>{{ $mk->exm ?: '-' }}</td>
+                        <td>{{ $mk->exm ?: 'N/A' }}</td> --}}
 
-                        @if($ex->term < 3)
-                        <td>{{ $ex->term == 1 ? $mk->tex1 ?: '-' : $mk->tex2 ?: '-' }}</td>
-                        <td>{{ $mk->grade ? $mk->grade->name : '-' }}</td>
-                        <td>{!! ($mk->grade) ? Mk::getSuffix($mk->sub_pos) : '-' !!}</td>
-                        <td>{{ $mk->grade ? $mk->grade->remark : '-' }}</td>
+                        @if($ex->term < 4)
+                            @if($ex->term == 1)
+                                <td>{{  $mk->tex1  ?: 'N/A'}}</td>
+                            @elseif ($ex->term == 2)
+                                <td>{{  $mk->tex2  ?: 'N/A'}}</td>
+                            @elseif ($ex->term == 3)
+                                <td>{{  $mk->tex3  ?: 'N/A'}}</td>
+                            @endif
+                        {{-- <td>{!! ($mk->grade) ? Mk::getSuffix($mk->sub_pos) : 'N/A' !!}</td> --}}
+                        <td>{{ $mk->grade ? $mk->grade->remark : 'N/A' }}</td>
                         @endif
 
-                        @if($ex->term == 3)
-                        <td>{{ $mk->tex3 ?: '-' }}</td>
-                        <td>{{ Mk::getSubTotalTerm($student_id, $sub->id, 1, $mk->my_class_id, $year) }}</td>
-                        <td>{{ Mk::getSubTotalTerm($student_id, $sub->id, 2, $mk->my_class_id, $year) }}</td>
-                        <td>{{ $mk->cum ?: '-' }}</td>
-                        <td>{{ $mk->cum_ave ?: '-' }}</td>
-                        <td>{{ $mk->grade ? $mk->grade->name : '-' }}</td>
-                        <td>{{ $mk->grade ? $mk->grade->remark : '-' }}</td>
+                        @if($ex->term == 4)
+                        <td>{{ Mk::getSubTotalTerm($student_id, $sub->id, 1, $mk->my_class_id, $year) ?: 'N/A'}}</td>
+                        <td>{{ Mk::getSubTotalTerm($student_id, $sub->id, 2, $mk->my_class_id, $year) ?: 'N/A'}}</td>
+                        <td>{{ Mk::getSubTotalTerm($student_id, $sub->id, 3, $mk->my_class_id, $year) ?: 'N/A'}}</td>
+                        <td>{{ $mk->tex4 ?: 'N/A' }}</td>
+                        <td>{{ $mk->cum ?: 'N/A' }}</td>
+                        <td>{{ $mk->cum_ave ?: 'N/A' }}</td>
+                        {{-- <td>{{ $mk->grade ? $mk->grade->name : '-' }}</td> --}}
+                        <td>{{ $mk->grade ? $mk->grade->remark : 'N/A' }}</td>
                         @endif
 
                     @endforeach
                     </tr>
                     @endforeach
                 <tr>
-                    <td colspan="{{ $ex->term < 3 ? 5 : 7 }}"><strong>TOTAL SCORES OBTAINED: </strong> {{ $exr->total }}</td>
-                    <td colspan="{{ $ex->term < 3 ? 3 : 3 }}"><strong>FINAL AVERAGE: </strong> {{ $exr->ave }}</td>
-                    <td colspan="{{ $ex->term < 3 ? 2 : 3 }}"><strong>CLASS AVERAGE: </strong> {{ $exr->class_ave }}</td>
+                    <td colspan="{{ $ex->term < 4 ? 3 : 6 }}"><strong>TOTAL SCORES OBTAINED: </strong> {{ $exr->total ?: 'N/A' }}</td>
+                    <td colspan="{{ $ex->term < 4 ? 3 : 4 }}"><strong>FINAL AVERAGE: </strong> {{ $exr->ave ?: 'N/A'}}</td>
+                    {{-- <td colspan="{{ $ex->term < 3 ? 2 : 3 }}"><strong>CLASS AVERAGE: </strong> {{ $exr->class_ave ?: 'N/A'}}</td> --}}
                 </tr>
                 </tbody>
             </table>
@@ -123,7 +130,7 @@
     </div>
 
     {{--    AF AND PS   --}}
-    @if(in_array($ct, ['J', 'S']) )
+    {{-- @if(in_array($ct, ['J', 'S']) )
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
@@ -194,7 +201,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    @endif --}}
     @endif
 
 @endforeach

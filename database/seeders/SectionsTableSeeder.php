@@ -27,6 +27,26 @@ class SectionsTableSeeder extends Seeder
             ['name' => 'Section 2', 'my_class_id' => $c[2], 'active' => 0],
             ['name' => 'Section 1', 'my_class_id' => $c[3], 'active' => 1],
             ['name' => 'Section 2', 'my_class_id' => $c[3], 'active' => 0],
+            ['name' => 'Section 1', 'my_class_id' => $c[4], 'active' => 1],
+            ['name' => 'Section 2', 'my_class_id' => $c[4], 'active' => 0],
+            ['name' => 'Section 1', 'my_class_id' => $c[5], 'active' => 1],
+            ['name' => 'Section 2', 'my_class_id' => $c[5], 'active' => 0],
+            ['name' => 'Section 1', 'my_class_id' => $c[6], 'active' => 1],
+            ['name' => 'Section 2', 'my_class_id' => $c[6], 'active' => 0],
+            ['name' => 'Section 1', 'my_class_id' => $c[7], 'active' => 1],
+            ['name' => 'Section 2', 'my_class_id' => $c[7], 'active' => 0],
+            ['name' => 'Section 1', 'my_class_id' => $c[8], 'active' => 1],
+            ['name' => 'Section 2', 'my_class_id' => $c[8], 'active' => 0],
+            ['name' => 'Section 1', 'my_class_id' => $c[9], 'active' => 1],
+            ['name' => 'Section 2', 'my_class_id' => $c[9], 'active' => 0],
+            ['name' => 'Section 1', 'my_class_id' => $c[10], 'active' => 1],
+            ['name' => 'Section 2', 'my_class_id' => $c[10], 'active' => 0],
+            ['name' => 'Section 1', 'my_class_id' => $c[11], 'active' => 1],
+            ['name' => 'Section 2', 'my_class_id' => $c[11], 'active' => 0],
+            ['name' => 'Section 1', 'my_class_id' => $c[12], 'active' => 1],
+            ['name' => 'Section 2', 'my_class_id' => $c[12], 'active' => 0],
+
+
         ];
 
         DB::table('sections')->insert($data);

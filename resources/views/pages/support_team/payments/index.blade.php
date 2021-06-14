@@ -52,7 +52,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Class Payments</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        @foreach($my_classes as $mc)
+                        @foreach(App\Models\MyClass::orderBy('id')->get() as $c)
                             <a href="#pc-{{ $mc->id }}" class="dropdown-item" data-toggle="tab">{{ $mc->name }}</a>
                         @endforeach
                     </div>

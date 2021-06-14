@@ -21,7 +21,7 @@
                                             <label for="my_class_id" class="col-form-label font-weight-bold">Class:</label>
                                             <select required onchange="getClassSections(this.value)" id="my_class_id" name="my_class_id" class="form-control select">
                                                 <option value="">Select Class</option>
-                                                @foreach($my_classes as $c)
+                                                @foreach(App\Models\MyClass::orderBy('id')->get() as $c)
                                                     <option {{ ($selected && $my_class_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                                 @endforeach
                                             </select>
@@ -74,7 +74,7 @@
                 @foreach($students as $s)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
+                        <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ asset('/storage/'.config('chatify.user_avatar.folder').'/'.$s->user->avatar) }}" alt="photo"></td>
                         <td>{{ $s->user->name }}</td>
                         <td>{{ $s->adm_no }}</td>
                         <td><a class="btn btn-danger" href="{{ route('marks.year_select', Qs::hash($s->user_id)) }}">View Marksheet</a></td>

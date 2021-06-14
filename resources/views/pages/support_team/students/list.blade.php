@@ -15,7 +15,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Sections</a>
                     <div class="dropdown-menu dropdown-menu-right">
                         @foreach($sections as $s)
-                            <a href="#s{{ $s->id }}" class="dropdown-item" data-toggle="tab">{{ $my_class->name.' '.$s->name }}</a>
+                            <a href="#s{{ $s->id }}" class="dropdown-item" data-toggle="tab">{{ $s->name }}</a>
                         @endforeach
                     </div>
                 </li>
@@ -29,9 +29,11 @@
                             <th>S/N</th>
                             <th>Photo</th>
                             <th>Name</th>
-                            <th>ADM_No</th>
+                            <th>ID Number</th>
                             <th>Section</th>
+                            <th>Contact Number</th>
                             <th>Email</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -39,11 +41,19 @@
                         @foreach($students as $s)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
+                                <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ asset('/storage/'.config('chatify.user_avatar.folder').'/'.$s->user->avatar) }}" alt="photo"></td>
                                 <td>{{ $s->user->name }}</td>
                                 <td>{{ $s->adm_no }}</td>
-                                <td>{{ $my_class->name.' '.$s->section->name }}</td>
+                                <td>{{ $s->section->name }}</td>
+                                <td>{{ $s->user->phone }}</td>
                                 <td>{{ $s->user->email }}</td>
+                                <td>
+                                    @if ($s->status == '1')
+                                        Active
+                                    @elseif ($s->status == '0')
+                                        Pending
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     <div class="list-icons">
                                         <div class="dropdown">
@@ -57,8 +67,8 @@
                                                     <a href="{{ route('students.edit', Qs::hash($s->id)) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
                                                     <a href="{{ route('st.reset_pass', Qs::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-lock"></i> Reset password</a>
                                                 @endif
-                                                <a target="_blank" href="{{ route('marks.year_selector', Qs::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
-
+                                                <a target="_blank" href="{{ route('marks.year_selector', Qs::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-book"></i> Marksheet</a>
+                                                <a href="{{ route('approve', Qs::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-check"></i> Activate</a>
                                                 {{--Delete--}}
                                                 @if(Qs::userIsSuperAdmin())
                                                     <a id="{{ Qs::hash($s->user->id) }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
@@ -75,13 +85,16 @@
                 </div>
 
                 @foreach($sections as $se)
-                    <div class="tab-pane fade" id="s{{$se->id}}">                         <table class="table datatable-button-html5-columns">
+                    <div class="tab-pane fade" id="s{{$se->id}}">
+                        <table class="table datatable-button-html5-columns">
                             <thead>
                             <tr>
                                 <th>S/N</th>
                                 <th>Photo</th>
                                 <th>Name</th>
-                                <th>ADM_No</th>
+                                <th>ID Number</th>
+                                <th>Section</th>
+                                <th>Contact Number</th>
                                 <th>Email</th>
                                 <th>Action</th>
                             </tr>
@@ -90,9 +103,11 @@
                             @foreach($students->where('section_id', $se->id) as $sr)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $sr->user->photo }}" alt="photo"></td>
+                                    <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ asset('/storage/'.config('chatify.user_avatar.folder').'/'.$sr->user->avatar) }}" alt="photo"></td>
                                     <td>{{ $sr->user->name }}</td>
                                     <td>{{ $sr->adm_no }}</td>
+                                    <td>{{ $sr->section->name }}</td>
+                                    <td>{{ $sr->user->phone }}</td>
                                     <td>{{ $sr->user->email }}</td>
                                     <td class="text-center">
                                         <div class="list-icons">
@@ -104,7 +119,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a href="{{ route('students.show', Qs::hash($sr->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Info</a>
                                                     @if(Qs::userIsTeamSA())
-                                                        <a href="{{ route('students.edit', Qs::hash($sr->id)) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
+                                                        <a href="{{ route('students.edit', Qs::hash($sr->user->id)) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
                                                         <a href="{{ route('st.reset_pass', Qs::hash($sr->user->id)) }}" class="dropdown-item"><i class="icon-lock"></i> Reset password</a>
                                                     @endif
                                                     <a href="#" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>

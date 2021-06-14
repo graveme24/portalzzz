@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('page_title', 'Edit Exam - '.$ex->name. ' ('.$ex->year.')')
+@section('page_title', 'Edit Quarter - '.$ex->name. ' ('.$ex->year.')')
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Edit Exam</h6>
+            <h6 class="card-title">Edit Quarter</h6>
             {!! Qs::getPanelOptions() !!}
         </div>
 
@@ -27,6 +27,7 @@
                                     <option {{ $ex->term == 1 ? 'selected' : '' }} value="1">First Term</option>
                                     <option {{ $ex->term == 2 ? 'selected' : '' }} value="2">Second Term</option>
                                     <option {{ $ex->term == 3 ? 'selected' : '' }} value="3">Third Term</option>
+                                    <option {{ $ex->term == 4 ? 'selected' : '' }} value="4">Fourth Term</option>
                                 </select>
                             </div>
                         </div>

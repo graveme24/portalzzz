@@ -5,7 +5,6 @@ use App\Models\ClassType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-
 class MyClassesTableSeeder extends Seeder
 {
     /**
@@ -21,18 +20,18 @@ class MyClassesTableSeeder extends Seeder
         $data = [
             ['name' => 'Kindergarten', 'class_type_id' => $ct[0]],
             ['name' => 'Preparatory', 'class_type_id' => $ct[0]],
-            ['name' => 'Grade 01', 'class_type_id' => $ct[1]],
-            ['name' => 'Grade 02', 'class_type_id' => $ct[1]],
-            ['name' => 'Grade 03', 'class_type_id' => $ct[1]],
-            ['name' => 'Grade 04', 'class_type_id' => $ct[1]],
-            ['name' => 'Grade 05', 'class_type_id' => $ct[1]],
-            ['name' => 'Grade 06', 'class_type_id' => $ct[1]],
-            ['name' => 'Grade 07', 'class_type_id' => $ct[1]],
-            ['name' => 'Grade 08', 'class_type_id' => $ct[1]],
-            ['name' => 'Grade 09', 'class_type_id' => $ct[1]],
-            ['name' => 'Grade 10', 'class_type_id' => $ct[1]],
-            ['name' => 'Grade 11', 'class_type_id' => $ct[2]],
-            ['name' => 'Grade 12', 'class_type_id' => $ct[2]],
+            ['name' => 'Grade 1', 'class_type_id' => $ct[1]],
+            ['name' => 'Grade 2', 'class_type_id' => $ct[1]],
+            ['name' => 'Grade 3', 'class_type_id' => $ct[1]],
+            ['name' => 'Grade 4', 'class_type_id' => $ct[1]],
+            ['name' => 'Grade 5', 'class_type_id' => $ct[1]],
+            ['name' => 'Grade 6', 'class_type_id' => $ct[1]],
+            ['name' => 'Grade 7', 'class_type_id' => $ct[2]],
+            ['name' => 'Grade 8', 'class_type_id' => $ct[2]],
+            ['name' => 'Grade 9', 'class_type_id' => $ct[2]],
+            ['name' => 'Grade 10', 'class_type_id' => $ct[2]],
+            ['name' => 'Grade 11', 'class_type_id' => $ct[3]],
+            ['name' => 'Grade 12', 'class_type_id' => $ct[3]],
 
 
 

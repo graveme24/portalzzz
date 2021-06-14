@@ -4,7 +4,7 @@
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title font-weight-semibold">Update System Settungs </h6>
+            <h6 class="card-title font-weight-semibold">Update System Settings </h6>
             {!! Qs::getPanelOptions() !!}
         </div>
 
@@ -72,8 +72,8 @@
                                 <span class="font-weight-bold font-italic">M-D-Y or M/D/Y </span>
                             </div>
                         </div>
-                        <div class="form-group row" style="visibility: hidden">
-                            <label for="lock_exam" class="col-lg-3 col-form-label font-weight-semibold">Lock Exam</label>
+                        <div class="form-group row">
+                            <label for="lock_exam" class="col-lg-3 col-form-label font-weight-semibold">Lock Viewing of Grades</label>
                             <div class="col-lg-3">
                                 <select class="form-control select" name="lock_exam" id="lock_exam">
                                     <option {{ $s['lock_exam'] ? 'selected' : '' }} value="1">Yes</option>
@@ -88,12 +88,12 @@
                 <div class="col-md-6">
                     {{--Fees--}}
                <fieldset>
-                   <legend><strong>Next Term Fees</strong></legend>
+                   <legend><strong>Next Term Tuition Fee</strong></legend>
                    @foreach($class_types as $ct)
                    <div class="form-group row">
                        <label class="col-lg-3 col-form-label font-weight-semibold">{{ $ct->name }}</label>
                        <div class="col-lg-9">
-                        <input class="form-control" value="{{ $s['next_term_fees_'.strtolower($ct->code)] }}" name="next_term_fees_{{ strtolower($ct->code) }}" placeholder="{{ $ct->name }}" type="text">
+                           <input class="form-control" value="{{ $s['next_term_fees_'.strtolower($ct->code)] }}" name="next_term_fees_{{ strtolower($ct->code) }}" placeholder="{{ $ct->name }}" type="text">
                        </div>
                    </div>
                        @endforeach

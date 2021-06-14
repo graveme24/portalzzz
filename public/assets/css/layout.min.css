@@ -497,7 +497,7 @@ body {
 }
 
 .sidebar-dark {
-    background-color: #263238;
+    background-color: #193d81;
     color: #fff
 }
 
@@ -552,7 +552,7 @@ body {
 .sidebar-dark .nav-sidebar>.nav-item>.nav-link.active,
 .sidebar-light .card[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent) .nav-sidebar>.nav-item-open>.nav-link:not(.disabled),
 .sidebar-light .card[class*=bg-]:not(.bg-light):not(.bg-white):not(.bg-transparent) .nav-sidebar>.nav-item>.nav-link.active {
-    background-color: #04255d;
+    /* background-color: #26a69a; */
     color: #fff
 }
 

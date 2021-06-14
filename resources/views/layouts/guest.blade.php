@@ -6,18 +6,21 @@
         <title>Haven of Wisdom Academy</title>
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title> @yield('page_title') | {{ config('app.name') }} </title>
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker.min.css') }}" type="text/css">
         <link rel="stylesheet" href="fontawesome-5.5/css/all.min.css" />
         <link rel="stylesheet" href="slick/slick.css">
         <link rel="stylesheet" href="slick/slick-theme.css">
         <link rel="stylesheet" href="magnific-popup/magnific-popup.css">
         <link rel="stylesheet" href="css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/tooplate-infinite-loop.css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet"><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.css" integrity="sha256-A66pMx+rXyk6CAO5trwo2V/M7hZQ2rw9Yc/FHUUFSgk=" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/main.css" integrity="sha256-M4Uz0KnKR3Zuk0PdyNLeM2fdQc3+uIV26FO5idbWJDY=" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/main.min.css" integrity="sha256-lb6jjUl3OiZ5L/IlozGnDaOLw46mDeFx3S5goaPekPA=" crossorigin="anonymous">
 
+        <title> @yield('page_title') | {{ config('app.name') }} </title>
+
+        @include('partials.inc_top')
     </head>
-    <body class="{{ in_array(Route::currentRouteName(), ['payments.invoice', 'marks.tabulation', 'marks.show', 'ttr.manage', 'ttr.show']) ? 'sidebar-xs' : '' }}">
+    <body class="{{ in_array(Route::currentRouteName(), ['payments.invoice', 'marks.tabulation', 'marks.show', 'ttr.manage', 'ttr.show']) ? 'sidebar-xs' : '' }}" style="backdrop-filter: blur(4px);">
         {{-- @include('partials.top_menu')
         <div class="page-content">
             @include('partials.menu')
@@ -44,17 +47,8 @@
 
             {{-- </div>
         </div> --}}
-
-
-        {{-- <script src="{{ asset('global_assets/js/plugins/pickers/bootstrap-datepicker.min.js') }}"></script> --}}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery-1.9.1.min.js"></script>
-        <script src="slick/slick.min.js"></script>
-        <script src="magnific-popup/jquery.magnific-popup.min.js"></script>
-        <script src="js/easing.min.js"></script>
-        <script src="js/jquery.singlePageNav.min.js"></script>
+        @include('partials.inc_bottom')
+        @yield('scripts')
         <script>
 
             function getOffSet(){
@@ -201,45 +195,22 @@
                 ]
               });
 
-              // Gallery
-            //   $('.tm-gallery').slick({
-            //     dots: true,
-            //     infinite: false,
-            //     slidesToShow: 5,
-            //     slidesToScroll: 2,
-            //     responsive: [
-            //     {
-            //       breakpoint: 1199,
-            //       settings: {
-            //         slidesToShow: 4,
-            //         slidesToScroll: 2
-            //       }
-            //     },
-            //     {
-            //       breakpoint: 991,
-            //       settings: {
-            //         slidesToShow: 3,
-            //         slidesToScroll: 2
-            //       }
-            //     },
-            //     {
-            //       breakpoint: 767,
-            //       settings: {
-            //         slidesToShow: 2,
-            //         slidesToScroll: 1
-            //       }
-            //     },
-            //     {
-            //       breakpoint: 480,
-            //       settings: {
-            //         slidesToShow: 1,
-            //         slidesToScroll: 1
-            //       }
-            //     }
-            //   ]
-            //   });
+
             });
+        </script>
+        <script>
 
         </script>
+        <script src="js/jquery-1.9.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="slick/slick.min.js"></script>
+        <script src="magnific-popup/jquery.magnific-popup.min.js"></script>
+        <script src="js/easing.min.js"></script>
+        <script src="js/jquery.singlePageNav.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.js" integrity="sha256-UYwUI07v3ZaBPEu6HOJIokV15Zeh2Xj/bGT+MxtA0l0=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/main.min.js" integrity="sha256-Ao+73w9IZNPf3C3Ij0Dyj5ZYdxA/xC1kobU9G2TQJyA=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/locales-all.js" integrity="sha256-JioheWkYsJTaMcygTlhzmt6Ut1dx+YAaos5dDPYu/6w=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/locales-all.min.js" integrity="sha256-6TW9hevn9VV+Dk6OtclSzIjH05B6f2WWhJ/PQgy7m7s=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/main.js" integrity="sha256-rZzBwSK1mhxhhAmAmuhuadbNunmGpnFnzfsPpGRugrQ=" crossorigin="anonymous"></script>
     </body>
 </html>

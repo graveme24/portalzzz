@@ -16,7 +16,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Show TimeTables</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        @foreach($my_classes as $mc)
+                        @foreach(App\Models\MyClass::orderBy('id')->get() as $mc)
                             <a href="#ttr{{ $mc->id }}" class="dropdown-item" data-toggle="tab">{{ $mc->name }}</a>
                         @endforeach
                     </div>
@@ -42,7 +42,7 @@
                                <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
                                <div class="col-lg-9">
                                    <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
-                                       @foreach($my_classes as $mc)
+                                       @foreach(App\Models\MyClass::orderBy('id')->get() as $mc)
                                            <option {{ old('my_class_id') == $mc->id ? 'selected' : '' }} value="{{ $mc->id }}">{{ $mc->name }}</option>
                                        @endforeach
                                    </select>

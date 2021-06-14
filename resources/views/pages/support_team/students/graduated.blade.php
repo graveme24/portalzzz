@@ -14,7 +14,7 @@
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Select Class</a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    @foreach($my_classes as $c)
+                    @foreach(App\Models\MyClass::orderBy('id')->get() as $c)
                     <a href="#c{{ $c->id }}" class="dropdown-item" data-toggle="tab">{{ $c->name }}</a>
                     @endforeach
                 </div>
@@ -39,7 +39,7 @@
                     @foreach($students as $s)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
+                        <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ asset('/storage/'.config('chatify.user_avatar.folder').'/'.$s->user->avatar) }}" alt="photo"></td>
                         <td>{{ $s->user->name }}</td>
                         <td>{{ $s->adm_no }}</td>
                         <td>{{ $s->my_class->name.' '.$s->section->name }}</td>

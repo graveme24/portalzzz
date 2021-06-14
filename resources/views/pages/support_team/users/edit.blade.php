@@ -39,41 +39,29 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Email address: </label>
-                                <input value="{{ $user->email }}" type="email" name="email" class="form-control" placeholder="your@email.com">
+                                <label>Date of Birth:</label>
+                                <input autocomplete="off" name="dob" value="{{ $user->dob}}" type="text" class="form-control date-pick" placeholder="Select Date...">
+
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Phone:</label>
-                                <input value="{{ $user->phone }}" type="text" name="phone" class="form-control" placeholder="" >
+                                <label>Phone:<span class="text-danger">*</span></label>
+                                <input value="{{ $user->phone }}" type="text" name="phone" class="form-control" placeholder="" maxlength="11" required>
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Telephone:</label>
-                                <input value="{{ $user->phone2 }}" type="text" name="phone2" class="form-control" placeholder="" >
+                                <input value="{{ $user->phone2 }}" type="text" name="phone2" class="form-control" placeholder="" maxlength="7">
                             </div>
                         </div>
 
-                    </div>
-
-                    <div class="row">
-                        @if(in_array($user->user_type, Qs::getStaff()))
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Date of Employment:</label>
-                                    <input autocomplete="off" name="emp_date" value="{{ $user->staff->first()->emp_date }}" type="text" class="form-control date-pick" placeholder="Select Date...">
-
-                                </div>
-                            </div>
-                        @endif
-
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="gender">Gender: <span class="text-danger">*</span></label>
                                 <select class="select form-control" id="gender" name="gender" required data-fouc data-placeholder="Choose..">
@@ -83,6 +71,45 @@
                                 </select>
                             </div>
                         </div>
+
+                        {{-- <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Telephone:</label>
+                                <input value="{{ $user->phone2 }}" type="text" name="phone2" class="form-control" placeholder="" >
+                            </div>
+                        </div> --}}
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Email address: </label>
+                                <input value="{{ $user->email }}" type="email" name="email" class="form-control" placeholder="your@email.com" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Username: </label>
+                                <input value="{{ $user->username }}" type="text" name="username" class="form-control" placeholder="Username" required>
+                            </div>
+                        </div>
+
+
+
+                        @if(in_array($user->user_type, Qs::getStaff()))
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Date of Employment:</label>
+                                    <input autocomplete="off" name="emp_date" value="{{ $user->staff->first()->emp_date }}" type="text" class="form-control date-pick" placeholder="Select Date...">
+
+                                </div>
+                            </div>
+                        @endif
+
+
 
                         {{-- <div class="col-md-4">
                             <div class="form-group">
@@ -115,7 +142,7 @@
                             </select>
                         </div> --}}
 
-                        <div class="col-md-4">
+                        {{-- <div class="col-md-4">
                             <div class="form-group">
                                 <label for="bg_id">Blood Group: </label>
                                 <select class="select form-control" id="bg_id" name="bg_id" data-fouc data-placeholder="Choose..">
@@ -125,12 +152,12 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
 
                     {{--Passport--}}
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="d-block">Upload Passport Photo:</label>
@@ -138,7 +165,7 @@
                                 <span class="form-text text-muted">Accepted Images: jpeg, png. Max file size 2Mb</span>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                 </fieldset>
 

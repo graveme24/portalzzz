@@ -7,7 +7,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="exam_id" class="col-form-label font-weight-bold">Exam:</label>
+                                <label for="exam_id" class="col-form-label font-weight-bold">Period:</label>
                                 <select required id="exam_id" name="exam_id" data-placeholder="Select Exam" class="form-control select">
                                     @foreach($exams as $ex)
                                         <option {{ $selected && $exam_id == $ex->id ? 'selected' : '' }} value="{{ $ex->id }}">{{ $ex->name }}</option>
@@ -21,7 +21,7 @@
                                 <label for="my_class_id" class="col-form-label font-weight-bold">Class:</label>
                                 <select required onchange="getClassSubjects(this.value)" id="my_class_id" name="my_class_id" class="form-control select">
                                     <option value="">Select Class</option>
-                                    @foreach($my_classes as $c)
+                                    @foreach(App\Models\MyClass::orderBy('id')->get() as $c)
                                         <option {{ ($selected && $my_class_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                     @endforeach
                                 </select>

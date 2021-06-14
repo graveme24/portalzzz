@@ -13227,7 +13227,7 @@ textarea#HandsontableCopyPaste {
  *
  *  # Responsive extension
  *
- *  Optimise the table's layout for different screen sizes through the dynamic 
+ *  Optimise the table's layout for different screen sizes through the dynamic
  *  insertion and removal of columns from the table
  *
  * ---------------------------------------------------------------------------- */
@@ -13982,7 +13982,8 @@ textarea#HandsontableCopyPaste {
   background-size: cover; }
 
 .login-form {
-  width: 100%; }
+  width: 100%;
+  }
   .login-form .nav-item:first-child .nav-link {
     border-top-left-radius: 0.125rem; }
   .login-form .nav-item:last-child .nav-link {

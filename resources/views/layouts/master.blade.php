@@ -8,6 +8,9 @@
     <meta id="csrf-token" name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="CJ Inspired">
 
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.css" integrity="sha256-A66pMx+rXyk6CAO5trwo2V/M7hZQ2rw9Yc/FHUUFSgk=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/main.css" integrity="sha256-M4Uz0KnKR3Zuk0PdyNLeM2fdQc3+uIV26FO5idbWJDY=" crossorigin="anonymous"> --}}
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/main.min.css" integrity="sha256-lb6jjUl3OiZ5L/IlozGnDaOLw46mDeFx3S5goaPekPA=" crossorigin="anonymous"> --}}
     <title> @yield('page_title') | {{ config('app.name') }} </title>
 
     @include('partials.inc_top')
@@ -56,6 +59,7 @@
         });
 
         var calendar = $('#calendar').fullCalendar({
+
             editable:true,
             header:{
                 left:'prev,next today',
@@ -63,8 +67,10 @@
                 right:'month,agendaWeek,agendaDay'
             },
             events:'/dashboard',
-            selectable:true,
+            eventColor: '#2541b2',
+            selectable: true,
             selectHelper: true,
+
             select:function(start, end, allDay)
             {
                 var title = prompt('Event Title:');
@@ -74,6 +80,8 @@
                     var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
 
                     var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
+
+
 
                     $.ajax({
                         url:"/dashboard/action",
@@ -93,6 +101,7 @@
                 }
             },
             editable:true,
+
             eventResize: function(event, delta)
             {
                 var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
@@ -163,6 +172,67 @@
         });
 
     });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var calendar = $('#viewonlycalendar').fullCalendar({
+            editable:false,
+            header:{
+                left:'prev,next today',
+                center:'title',
+                right:'month,agendaWeek,agendaDay'
+            },
+            events:'/dashboard',
+            selectable:false,
+            selectHelper: false,
+            select:function(start, end, allDay)
+            {
+                var title = prompt('Event Title:');
+
+                if(title)
+                {
+                    var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
+
+                    var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
+
+                    $.ajax({
+                        url:"/dashboard/action",
+                        type:"POST",
+                        data:{
+                            title: title,
+                            start: start,
+                            end: end,
+                            type: 'add'
+                        },
+                        success:function(data)
+                        {
+                            calendar.fullCalendar('refetchEvents');
+                            alert("Event Created Successfully");
+                        }
+                    })
+                }
+            },
+
+
+
+        });
+
+    });
 
 </script>
+
+{{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.js" integrity="sha256-UYwUI07v3ZaBPEu6HOJIokV15Zeh2Xj/bGT+MxtA0l0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/main.min.js" integrity="sha256-Ao+73w9IZNPf3C3Ij0Dyj5ZYdxA/xC1kobU9G2TQJyA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/locales-all.js" integrity="sha256-JioheWkYsJTaMcygTlhzmt6Ut1dx+YAaos5dDPYu/6w=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/locales-all.min.js" integrity="sha256-6TW9hevn9VV+Dk6OtclSzIjH05B6f2WWhJ/PQgy7m7s=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.0/main.js" integrity="sha256-rZzBwSK1mhxhhAmAmuhuadbNunmGpnFnzfsPpGRugrQ=" crossorigin="anonymous"></script> --}}
 </html>

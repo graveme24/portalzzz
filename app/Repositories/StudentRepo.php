@@ -12,9 +12,8 @@ class StudentRepo {
 
     public function findStudentsByClass($class_id)
     {
-        return $this->activeStudents()->where(['my_class_id' => $class_id])->with(['my_class', 'user'])->get()->sortBy('user.name');
+        return $this->activeStudents()->where(['my_class_id' => $class_id, 'status' => '1'])->with(['my_class', 'user'])->get()->sortBy('user.name');
     }
-
     public function activeStudents()
     {
         return StudentRecord::where(['grad' => 0]);

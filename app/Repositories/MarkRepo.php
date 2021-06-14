@@ -45,8 +45,8 @@ class MarkRepo
         $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_class_id' => $class_id, 'year' => $year];
 
         $term = $exam->term; $tex = 'tex'.$term;
-        if($term < 3){
-            $mk =Mark::where($d);
+        if($term < 4){
+            $mk = Mark::where($d);
             return $mk->select($tex)->sum($tex);
         }
 
@@ -55,7 +55,8 @@ class MarkRepo
         $t1 = $mk->select('tex1')->sum('tex1');
         $t2 = $mk->select('tex2')->sum('tex2');
         $t3 = $mk->select('tex3')->sum('tex3');
-        return $t1 + $t2 + $t3;
+        $t4 = $mk->select('tex4')->sum('tex4');
+        return $t1 + $t2 + $t3 + $t4;
     }
 
     public function getExamAvgTerm($exam, $st_id, $class_id, $sec_id, $year)
@@ -64,7 +65,7 @@ class MarkRepo
 
         $term = $exam->term; $tex = 'tex'.$term;
 
-        if($term < 3){
+        if($term < 4){
             $mk = Mark::where($d)->where($tex, '>', 0);
             $avg = $mk->select($tex)->avg($tex);
             return round($avg, 1);
@@ -76,31 +77,36 @@ class MarkRepo
         $t1 = $mk->select('tex1')->avg('tex1');
         $t2 = $mk->select('tex2')->avg('tex2');
         $t3 = $mk->select('tex3')->avg('tex3');
+        $t4 = $mk->select('tex4')->avg('tex4');
 
         $count = $t1 ? $count + 1 : $count;
         $count = $t2 ? $count + 1 : $count;
         $count = $t3 ? $count + 1 : $count;
+        $count = $t4 ? $count + 1 : $count;
 
-        $avg = $t1 + $t2 + $t3;
+        $avg = $t1 + $t2 + $t3 + $t4;
         return ($avg > 0) ? round($avg/$count, 1) : 0;
     }
 
-    public function getSubCumTotal($tex3, $st_id, $sub_id, $class_id, $year)
+    public function getSubCumTotal($tex4, $st_id, $sub_id, $class_id, $year)
     {
         $tex1 = $this->getSubTotalTerm($st_id, $sub_id, 1, $class_id, $year);
         $tex2 = $this->getSubTotalTerm($st_id, $sub_id, 2, $class_id, $year);
-        return $tex1 + $tex2 + $tex3;
+        $tex3 = $this->getSubTotalTerm($st_id, $sub_id, 3, $class_id, $year);
+        return $tex1 + $tex2 + $tex3 + $tex4;
     }
 
-    public function getSubCumAvg($tex3, $st_id, $sub_id, $class_id, $year)
+    public function getSubCumAvg($tex4, $st_id, $sub_id, $class_id, $year)
     {
         $count = 0;
         $tex1 = $this->getSubTotalTerm($st_id, $sub_id, 1, $class_id, $year);
         $count = $tex1 ? $count + 1 : $count;
         $tex2 = $this->getSubTotalTerm($st_id, $sub_id, 2, $class_id, $year);
         $count = $tex2 ? $count + 1 : $count;
+        $tex3 = $this->getSubTotalTerm($st_id, $sub_id, 3, $class_id, $year);
         $count = $tex3 ? $count + 1 : $count;
-        $total = $tex1 + $tex2 + $tex3;
+        $count = $tex4 ? $count + 1 : $count;
+        $total = $tex1 + $tex2 + $tex3 + $tex4;
 
         return ($total > 0) ? round($total/$count, 1) : 0;
     }
@@ -129,7 +135,7 @@ class MarkRepo
         $d = [ 'exam_id' => $exam->id, 'my_class_id' => $class_id, 'student_id' => $st_id, 'year' => $year ];
         $tex = 'tex'.$exam->term;
 
-        if($exam->term == 3){ unset($d['exam_id']); }
+        if($exam->term == 4){ unset($d['exam_id']); }
 
         return Mark::where($d)->whereNotNull($tex)->count();
     }
@@ -150,7 +156,7 @@ class MarkRepo
 
         $my_mk = Mark::where($d)->select($tex)->sum($tex);
 
-        if($exam->term == 3){
+        if($exam->term == 4){
             $my_mk = Mark::where($d)->select('cum')->sum('cum');
         }
 

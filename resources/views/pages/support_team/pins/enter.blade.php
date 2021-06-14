@@ -13,7 +13,7 @@
                     <form method="post" action="{{ route('pins.verify', Qs::hash($student->id)) }}">
                         @csrf
                         <div class="form-group">
-                            <label for="pin_code" class="font-weight-bold col-form-label">Enter Exam Pin for <span class="text-success font-size-lg">{{ $student->name }}</span></label>
+                            <label for="pin_code" class="font-weight-bold col-form-label">Enter Pin for <span class="text-success font-size-lg">{{ $student->name }}</span></label>
                             <input title="XXXXX-XXXXX-XXXXXX" class="form-control form-control-lg" placeholder="XXXXX-XXXXX-XXXXXX" style="text-transform:uppercase" pattern="[A-Za-z0-9]{5}-[A-Za-z0-9]{5}-[A-Za-z0-9]{6}" required name="pin_code" autocomplete="off" value="{{ old('pin_code') }}" type="text">
                         </div>
 

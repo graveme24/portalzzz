@@ -16,14 +16,14 @@ class SettingsTableSeeder extends Seeder
         DB::table('settings')->delete();
 
         $data = [
-            ['type' => 'current_session', 'description' => '2021-2022'],
+            ['type' => 'current_session', 'description' => '2019-2020'],
             ['type' => 'system_title', 'description' => 'HWA'],
             ['type' => 'system_name', 'description' => 'HAVEN OF WISDOM ACADEMY'],
-            ['type' => 'term_ends', 'description' => '7/10/2021'],
-            ['type' => 'term_begins', 'description' => '7/10/2022'],
+            ['type' => 'term_ends', 'description' => '7/10/2020'],
+            ['type' => 'term_begins', 'description' => '7/10/2021'],
             ['type' => 'phone', 'description' => '09101446674'],
             ['type' => 'address', 'description' => 'Alapan St, Imus, Cavite'],
-            ['type' => 'system_email', 'description' => 'havenofwisdom@gmail.com'],
+            ['type' => 'system_email', 'description' => 'havenwisdom11@gmail.com'],
             ['type' => 'alt_email', 'description' => ''],
             ['type' => 'email_host', 'description' => ''],
             ['type' => 'email_pass', 'description' => ''],

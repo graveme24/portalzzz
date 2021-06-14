@@ -12,10 +12,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Chatify\ChatifyMessenger;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'phone', 'phone2', 'dob', 'gender', 'photo', 'address', 'bg_id', 'password', 'nal_id', 'state_id', 'lga_id', 'code', 'user_type', 'email_verified_at'
+        'name', 'username', 'email', 'phone', 'dob', 'gender','avatar','photo', 'address', 'password', 'code', 'user_type', 'email_verified_at', 'phone2', 'pob', 'citizenship', 'mname', 'mage', 'moccu', 'fname', 'fage', 'foccu', 'gname', 'grel', 'rel'
     ];
 
     /**

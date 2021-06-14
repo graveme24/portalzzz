@@ -25,7 +25,7 @@
                             <div class="col-lg-9">
                                 <select class="form-control select-search" name="my_class_id" id="my_class_id">
                                     <option value="">All Classes</option>
-                                    @foreach($my_classes as $c)
+                                    @foreach(App\Models\MyClass::orderBy('id')->get() as $c)
                                         <option {{ old('my_class_id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                     @endforeach
                                 </select>
@@ -43,9 +43,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="amount" class="col-lg-3 col-form-label font-weight-semibold">Amount (<del style="text-decoration-style: double">N</del>) <span class="text-danger">*</span></label>
+                            <label for="amount" class="col-lg-3 col-form-label font-weight-semibold">Amount (PHP) <span class="text-danger">*</span></label>
                             <div class="col-lg-9">
-                                <input class="form-control" value="{{ old('amount') }}" required name="amount" id="amount" type="number">
+                                <input class="form-control" value="{{ old('amount') }}" required name="amount" id="amount" type="number" min="0">
                             </div>
                         </div>
 

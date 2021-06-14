@@ -17,7 +17,8 @@ class ClassTypesTableSeeder extends Seeder
         DB::table('class_types')->delete();
 
         $data = [
-            ['name' => 'Preschool', 'code' => 'P'],
+            ['name' => 'Preschool', 'code' => 'K'],
+            ['name' => 'Primary', 'code' => 'P'],
             ['name' => 'Junior Highschool', 'code' => 'J'],
             ['name' => 'Senior Highschool', 'code' => 'S'],
         ];

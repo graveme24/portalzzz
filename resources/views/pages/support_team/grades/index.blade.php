@@ -1,17 +1,17 @@
 @extends('layouts.master')
-@section('page_title', 'Manage Grades')
+@section('page_title', 'Manage Remarks')
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Manage Grades</h6>
+            <h6 class="card-title">Manage Remarks</h6>
             {!! Qs::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
             <ul class="nav nav-tabs nav-tabs-highlight">
-                <li class="nav-item"><a href="#all-grades" class="nav-link active" data-toggle="tab">Manage Grades</a></li>
-                <li class="nav-item"><a href="#new-grade" class="nav-link" data-toggle="tab"><i class="icon-plus2"></i> Add Grade</a></li>
+                <li class="nav-item"><a href="#all-grades" class="nav-link active" data-toggle="tab">Remarks List</a></li>
+                <li class="nav-item"><a href="#new-grade" class="nav-link" data-toggle="tab"><i class="icon-plus2"></i> Add Remark</a></li>
             </ul>
 
             <div class="tab-content">
@@ -30,7 +30,7 @@
                             <tbody>
                             @foreach($grades as $gr)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $gr->id }}</td>
                                     <td>{{ $gr->name }}</td>
                                     <td>{{ $gr->class_type_id ? $class_types->where('id', $gr->class_type_id)->first()->name : ''}}</td>
                                     <td>{{ $gr->mark_from.' - '.$gr->mark_to }}</td>
@@ -69,7 +69,7 @@
                             <div class="alert alert-info border-0 alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
 
-                                <span>If The grade you are creating applies to all class types select <strong>NOT APPLICABLE.</strong> Otherwise select the Class Type That the grade applies to</span>
+                                <span>If the remark you are creating applies to all class types select <strong>NOT APPLICABLE.</strong> Otherwise select the Class Type That the remark applies to</span>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label font-weight-semibold">Name <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
-                                        <input name="name" value="{{ old('name') }}" required type="text" class="form-control text-uppercase" placeholder="E.g. A1">
+                                        <input name="name" value="{{ old('name') }}" required type="text" class="form-control" placeholder="E.g. A1">
                                     </div>
                                 </div>
 

@@ -56,7 +56,7 @@ class UserRequest extends FormRequest
             // 'state_id' => 'State',
             // 'lga_id' => 'LGA',
             'user_type' => 'User',
-            'phone2' => 'Telephone',
+            // 'phone2' => 'Telephone',
         ];
     }
 

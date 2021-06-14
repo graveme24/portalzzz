@@ -5,7 +5,7 @@
         <div class="col-md-3 text-center">
             <div class="card">
                 <div class="card-body">
-                    <img style="width: 90%; height:90%" src="{{ $user->photo }}" alt="photo" class="rounded-circle">
+                    <img style="width: 90%; height:90%" src="{{ asset('/storage/'.config('chatify.user_avatar.folder').'/'.$user->avatar) }}" alt="photo" class="rounded-circle">
                     <br>
                     <h3 class="mt-3">{{ $user->name }}</h3>
                 </div>
@@ -52,7 +52,13 @@
                                 @if($user->phone)
                                     <tr>
                                         <td class="font-weight-bold">Phone</td>
-                                        <td>{{$user->phone.' '.$user->phone2 }}</td>
+                                        <td>{{$user->phone}}</td>
+                                    </tr>
+                                @endif
+                                @if($user->phone2)
+                                    <tr>
+                                        <td class="font-weight-bold">Telephone</td>
+                                        <td>{{$user->phone2 }}</td>
                                     </tr>
                                 @endif
                                 <tr>

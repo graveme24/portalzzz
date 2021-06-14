@@ -88,7 +88,7 @@ class MarkController extends Controller
         $d['year'] = $year;
         $d['student_id'] = $student_id;
 
-        $d['skills'] = in_array($ct, ['J', 'S']) ? $this->exam->getSkillByClassType($ct) : NULL;
+        // $d['skills'] = in_array($ct, ['J', 'S']) ? $this->exam->getSkillByClassType($ct) : NULL;
 
         $d['mark_type'] = Qs::getMarkType($d['ct']);
 
@@ -129,7 +129,8 @@ class MarkController extends Controller
         $d['student_id'] = $student_id;
         $d['exam_id'] = $exam_id;
 
-        $d['skills'] = in_array($ct, ['J', 'S']) ? $this->exam->getSkillByClassType($ct) : NULL;
+        // $d['skills'] = in_array($ct, ['J', 'S']) ? $this->exam->getSkillByClassType($ct) : NULL;
+
         $d['s'] = Setting::all()->flatMap(function($s){
             return [$s->type => $s->description];
         });
@@ -200,15 +201,16 @@ class MarkController extends Controller
             $st_id = $all_st_ids[] = $mk->student_id;
 
             if(in_array($class_type->code, ['J', 'P', 'S']) ){
-                $d['t1'] = $t1 = $mks['t1_'.$mk->id];
-                $d['t2'] = $t2 = $mks['t2_'.$mk->id];
-                $d['t3'] = $t3 = $mks['t3_'.$mk->id];
-                $d['tca'] = $tca = $t1 + $t2 + $t3;
+                // $d['t1'] = $t1 = $mks['t1_'.$mk->id];
+                // $d['t2'] = $t2 = $mks['t2_'.$mk->id];
+                // $d['t3'] = $t3 = $mks['t3_'.$mk->id];
+                // $d['t4'] = $t4 = $mks['t4_'.$mk->id];
+                // $d['tca'] = $tca = $t1 + $t2 + $t3;
                 $d['exm'] = $exm = $mks['exm_'.$mk->id];
             }
 
-            if($class_type->code == 'N'){
-                $d['t1'] = $tca = $d['tca'] = $mks['t1_'.$mk->id];
+            if($class_type->code == 'K'){
+                // $d['t1'] = $tca = $d['tca'] = $mks['t1_'.$mk->id];
                 $d['exm'] = $exm = $mks['exm_'.$mk->id];
             }
 
@@ -220,11 +222,11 @@ class MarkController extends Controller
                 $d['tex'.$exam->term] = $d['t1'] = $d['t2'] = $d['t3'] = $d['t4'] = $d['tca'] = $d['exm'] = NULL;
             }
 
-            if($exam->term < 3){
+            if($exam->term < 4){
                 $grade = $this->mark->getGrade($total, $class_type->id);
             }
 
-            if($exam->term == 3){
+            if($exam->term == 4){
                 $d['cum'] = $this->mark->getSubCumTotal($total, $st_id, $subject_id, $class_id, $this->year);
                 $d['cum_ave'] = $cav = $this->mark->getSubCumAvg($total, $st_id, $subject_id, $class_id, $this->year);
                 $grade = $this->mark->getGrade(round($cav), $class_type->id);
@@ -297,11 +299,11 @@ class MarkController extends Controller
 
             $total = $mk->$tex;
 
-            if($exam->term < 3){
+            if($exam->term < 4){
                 $grade = $this->mark->getGrade($total, $class_type->id);
             }
 
-            if($exam->term == 3){
+            if($exam->term == 4){
                 $d['cum'] = $this->mark->getSubCumTotal($total, $mk->student_id, $mk->subject_id, $class_id, $this->year);
                 $d['cum_ave'] = $cav = $this->mark->getSubCumAvg($total, $mk->student_id, $mk->subject_id, $class_id, $this->year);
                 $grade = $this->mark->getGrade(round($mk->cum_ave), $class_type->id);

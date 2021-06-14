@@ -20,7 +20,3 @@
     <script src="{{ asset('global_assets/js/main/jquery.min.js') }} "></script>
     <script src="{{ asset('global_assets/js/main/bootstrap.bundle.min.js') }} "></script>
     <script src="{{ asset('global_assets/js/plugins/loaders/blockui.min.js') }} "></script>
-{{-- CSS --}}
-    {{-- <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
-    <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.bundle.min.js"></script> --}}
-

@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -119,5 +119,6 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
+
 
 ];

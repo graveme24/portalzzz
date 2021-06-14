@@ -14,7 +14,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manage Subjects</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        @foreach($my_classes as $c)
+                        @foreach(App\Models\MyClass::orderBy('id')->get() as $c)
                             <a href="#c{{ $c->id }}" class="dropdown-item" data-toggle="tab">{{ $c->name }}</a>
                         @endforeach
                     </div>
@@ -46,7 +46,7 @@
                                     <div class="col-lg-9">
                                         <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
                                             <option value=""></option>
-                                            @foreach($my_classes as $c)
+                                            @foreach(App\Models\MyClass::orderBy('id')->get() as $c)
                                                 <option {{ old('my_class_id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                             @endforeach
                                         </select>

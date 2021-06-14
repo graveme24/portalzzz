@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('page_title', 'Edit Grade')
+@section('page_title', 'Edit Remark')
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Edit Grade</h6>
+            <h6 class="card-title">Edit Remark</h6>
             {!! Qs::getPanelOptions() !!}
         </div>
 

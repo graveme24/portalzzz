@@ -28,12 +28,13 @@ class StudentRecordCreate extends FormRequest
             'email' => 'sometimes|nullable|email|max:100|unique:users',
             'photo' => 'sometimes|nullable|image|mimes:jpeg,gif,png,jpg|max:2048',
             'address' => 'required|string|min:6|max:120',
-            'bg_id' => 'sometimes|nullable',
+
+            // 'bg_id' => 'sometimes|nullable',
             // 'state_id' => 'required',
             // 'lga_id' => 'required',
             // 'nal_id' => 'required',
-            'my_class_id' => 'nullable',
-            'section_id' => 'nullable',
+            'my_class_id' => 'required',
+            'section_id' => 'required',
             'my_parent_id' => 'sometimes|nullable',
             // 'dorm_id' => 'sometimes|nullable',
         ];
@@ -48,8 +49,8 @@ class StudentRecordCreate extends FormRequest
             // 'dorm_id' => 'Dormitory',
             // 'state_id' => 'State',
             // 'lga_id' => 'LGA',
-            'bg_id' => 'Blood Group',
-            // 'my_parent_id' => 'Parent',
+            // 'bg_id' => 'Blood Group',
+            'my_parent_id' => 'Parent',
         ];
     }
 
@@ -57,7 +58,7 @@ class StudentRecordCreate extends FormRequest
     {
         $input = $this->all();
 
-        // $input['my_parent_id'] = $input['my_parent_id'] ? Qs::decodeHash($input['my_parent_id']) : NULL;
+        $input['my_parent_id'] = $input['my_parent_id'] ? Qs::decodeHash($input['my_parent_id']) : NULL;
 
         $this->getInputSource()->replace($input);
 

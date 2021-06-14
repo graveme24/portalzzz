@@ -35,7 +35,7 @@
                 @foreach($promotions->sortBy('fc.name')->sortBy('student.name') as $p)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $p->student->photo }}" alt="photo"></td>
+                        <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ asset('/storage/'.config('chatify.user_avatar.folder').'/'.$p->student->avatar) }}" alt="photo"></td>
                         <td>{{ $p->student->name }}</td>
                         <td>{{ $p->fc->name.' '.$p->fs->name }}</td>
                         <td>{{ $p->tc->name.' '.$p->ts->name }}</td>

@@ -20,7 +20,6 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->delete();
 
         $this->createNewUsers();
-        // $this->createManyUsers( 3);
     }
 
     protected function createNewUsers()
@@ -29,44 +28,52 @@ class UsersTableSeeder extends Seeder
 
         $d = [
 
-            ['name' => 'Adrian Joseph Vallejo',
-                'email' => 'adrian@superadmin.com',
-                'username' => 'Superadmin Adrian',
+            ['name' => 'Superadmin Miguel',
+                'email' => 'miguel@super.com',
+                'username' => 'Superadmin Miguel',
                 'password' => $password,
                 'user_type' => 'super_admin',
+                'dob' => '12/03/1998',
                 'code' => strtoupper(Str::random(10)),
+                'gender' => 'Male',
                 'remember_token' => Str::random(10),
             ],
 
-            ['name' => 'Renz Gian Hayag',
-            'email' => 'renz@admin.com',
-            'password' => $password,
-            'user_type' => 'admin',
-            'username' => 'Admin Renz',
-            'code' => strtoupper(Str::random(10)),
-            'remember_token' => Str::random(10),
-            ],
+            // ['name' => 'Admin Alex',
+            // 'email' => 'alex@admin.com',
+            // 'password' => $password,
+            // 'user_type' => 'admin',
+            // 'username' => 'Admin Alex',
+            // 'dob' => '07/23/1996',
+            // 'gender' => 'Male',
+            // 'code' => strtoupper(Str::random(10)),
+            // 'remember_token' => Str::random(10),
+            // ],
 
-            ['name' => 'Mark Gerald Encinas',
-                'email' => 'mark@teacher.com',
-                'user_type' => 'teacher',
-                'username' => 'Teacher Mark',
-                'password' => $password,
-                'code' => strtoupper(Str::random(10)),
-                'remember_token' => Str::random(10),
-            ],
+            // ['name' => 'Teacher Kaisy',
+            //     'email' => 'kaisy@teacher.com',
+            //     'user_type' => 'teacher',
+            //     'username' => 'Teacher Kaisy',
+            //     'gender' => 'Female',
+            //     'dob' => '04/23/1998',
+            //     'password' => $password,
+            //     'code' => strtoupper(Str::random(10)),
+            //     'remember_token' => Str::random(10),
+            // ],
 
-            ['name' => 'John Kilmer Reyes',
-                'email' => 'kilmer@parent.com',
-                'user_type' => 'parent',
-                'username' => 'Parent Kilmer',
-                'password' => $password,
-                'code' => strtoupper(Str::random(10)),
-                'remember_token' => Str::random(10),
-            ],
+            // ['name' => 'Parent Dian',
+            //     'email' => 'dian@parent.com',
+            //     'user_type' => 'parent',
+            //     'username' => 'Parent Dian',
+            //     'gender' => 'Male',
+            //     'dob' => '03/23/1998',
+            //     'password' => $password,
+            //     'code' => strtoupper(Str::random(10)),
+            //     'remember_token' => Str::random(10),
+            // ],
 
-            // ['name' => 'Accountant Jeff',
-            //     'email' => 'accountant@accountant.com',
+            // ['name' => 'Accountant Dummy',
+            //     'email' => 'dummy@accountant.com',
             //     'user_type' => 'accountant',
             //     'username' => 'accountant',
             //     'password' => $password,
@@ -80,7 +87,7 @@ class UsersTableSeeder extends Seeder
     protected function createManyUsers(int $count)
     {
         $data = [];
-        $user_type = Qs::getAllUserTypes(['super_admin', 'librarian', 'accountant', 'student']);
+        $user_type = Qs::getAllUserTypes(['super_admin', 'student']);
 
         for($i = 1; $i <= $count; $i++){
 
