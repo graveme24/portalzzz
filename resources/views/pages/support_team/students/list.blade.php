@@ -27,7 +27,6 @@
                         <thead>
                         <tr>
                             <th>S/N</th>
-                            <th>Photo</th>
                             <th>Name</th>
                             <th>ID Number</th>
                             <th>Section</th>
@@ -41,7 +40,6 @@
                         @foreach($students as $s)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ asset('/storage/'.config('chatify.user_avatar.folder').'/'.$s->user->avatar) }}" alt="photo"></td>
                                 <td>{{ $s->user->name }}</td>
                                 <td>{{ $s->adm_no }}</td>
                                 <td>{{ $s->section->name }}</td>

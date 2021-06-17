@@ -119,7 +119,14 @@ class Qs
 
     public static function getStudentData($remove = [])
     {
-        $data = ['my_class_id', 'section_id', 'my_parent_id', 'year_admitted', 'age', 'adm_no', 'status'];
+        $data = ['my_class_id', 'section_id', 'my_parent_id', 'year_admitted', 'age', 'adm_no', 'status', 'mop_id'];
+
+        return $remove ? array_values(array_diff($data, $remove)) : $data;
+
+    }
+    public static function getPromissoryData($remove = [])
+    {
+        $data = ['payment_id', 'mop_id', 'student_id'];
 
         return $remove ? array_values(array_diff($data, $remove)) : $data;
 
@@ -174,7 +181,6 @@ class Qs
     {
         return in_array(Auth::user()->user_type, self::getTeamAcademic1());
     }
-
 
     public static function userIsAdministrative()
     {

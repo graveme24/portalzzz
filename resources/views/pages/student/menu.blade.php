@@ -13,9 +13,9 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="#" class="nav-link {{ in_array(Route::currentRouteName(), ['marks.show', 'marks.year_selector', 'pins.enter']) ? 'active' : '' }}">
+    <a href="{{ route('student.balances', Qs::hash(Auth::user()->id)) }}"  class="nav-link">
         <i class="icon-coins"></i>
-        <span>Balances</span>
+        <span>Balances / Promissory</span>
     </a>
 </li>
 

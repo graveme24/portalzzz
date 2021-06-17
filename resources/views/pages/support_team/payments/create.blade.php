@@ -23,8 +23,8 @@
                         <div class="form-group row">
                             <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class </label>
                             <div class="col-lg-9">
-                                <select class="form-control select-search" name="my_class_id" id="my_class_id">
-                                    <option value="">All Classes</option>
+                                <select class="form-control select-search" name="my_class_id" id="my_class_id" required>
+                                    <option value="">Select Class</option>
                                     @foreach(App\Models\MyClass::orderBy('id')->get() as $c)
                                         <option {{ old('my_class_id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                     @endforeach
@@ -53,6 +53,18 @@
                             <label for="description" class="col-lg-3 col-form-label font-weight-semibold">Description</label>
                             <div class="col-lg-9">
                                 <input class="form-control" value="{{ old('description') }}" name="description" id="description" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="mop_id" class="col-lg-3 col-form-label font-weight-semibold">Mode of Payment </label>
+                            <div class="col-lg-9">
+                                <select class="form-control select-search" name="mop_id" id="mop_id">
+                                    <option value="">All Types of Payment</option>
+                                    @foreach(App\Models\MopTypes::orderBy('id')->get() as $c)
+                                        <option {{ old('id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

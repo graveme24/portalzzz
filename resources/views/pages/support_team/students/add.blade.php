@@ -63,7 +63,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Phone: <span class="text-danger">*</span></label></label>
-                                <input value="{{ old('phone') }}" type="text" name="phone" class="form-control" placeholder="+63" maxlength="11">
+                                <input value="{{ old('phone') }}" type="text" name="phone" class="form-control" placeholder="+63" maxlength="11" required>
                             </div>
                         </div>
 
@@ -225,6 +225,17 @@
                                     @for($y=date('Y', strtotime('- 10 years')); $y<=date('Y'); $y++)
                                         <option {{ (old('year_admitted') == $y) ? 'selected' : '' }} value="{{ $y }}">{{ $y }}</option>
                                     @endfor
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="mop_id">Mode of Payment<span class="text-danger">*</span></label>
+                                <select class="form-control select-search" name="mop_id" id="mop_id">
+                                    <option value="">All Types of Payment</option>
+                                    @foreach(App\Models\MopTypes::orderBy('id')->get() as $c)
+                                        <option {{ old('id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

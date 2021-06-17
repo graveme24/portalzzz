@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use App\Models\PromissoryRecord;
 use App\Models\StudentRecord;
 use Illuminate\Http\Request;
 
@@ -90,6 +91,14 @@ class GuestController extends Controller
                 'session'=> Qs::getSetting('current_session'),
                 'year_admitted' => $yr,
             ]);
+            $mail =$data['email'];
+
+            $details = [
+                'title' => 'Mail from Haven of Wisdom',
+                'body' => 'Kindly login using your email with your password as: student',
+            ];
+
+            Mail::to($mail)->send(new TestMail($details));
             return redirect()->route('guest')->with('wait', 'Registered Successfully');
             // return redirect()->route('login')->with('success', 'You have no permission for this page!');
 
@@ -100,6 +109,31 @@ class GuestController extends Controller
         //     $f['path'] = $photo->storeAs(Qs::getUploadPath('student').$data['code'], $f['name']);
         //     $data['photo'] = asset('storage/' . $f['path']);
         // }
+    }
+    public function promissory(Request $req, $sr_id){
+        $sr_id = Qs::decodeHash($sr_id);
+        $sr = $this->student->getRecord(['id' => $sr_id])->first();
+        if(!$sr_id){return Qs::goWithDanger();}
+        $pr =  $req->only(Qs::getPromissoryData());
+        $srec = $req->only(Qs::getStudentData());
+        if($req->hasFile('promissory_file')) {
+            $pfile = $req['promissory_file']->file('promissory_file');
+            $f = Qs::getFileMetaData($pfile);
+            $f['name'] = 'promissory_file.' . $f['ext'];
+            $f['path'] = $pfile->storeAs(Qs::getUploadPath('promissorynotes').$req['code'], $f['name']);
+            $req['promissory_file'] = asset('storage/' . $f['path']);
+        }
+        $promi = PromissoryRecord::create([
+            'mop_id'=>$req->student_record->mop_id,
+            'student_id'=>$req->student_record->id,
+        ]);
+        $rec = StudentRecord::create([
+            'promissory_id'=>$promi->id,
+        ]);
+
+        $srec['promissory_id'] = $req->id;
+        // $srec['adm_no'] = $uname;
+        $srec['session'] = Qs::getSetting('current_session');
     }
 
 }

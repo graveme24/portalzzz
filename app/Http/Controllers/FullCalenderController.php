@@ -55,9 +55,9 @@ class FullCalenderController extends Controller
     	}
     }
 
-    public function getEvents(){
-        $events = Event::all();
-
+    public function events()
+    {
+        $events = Event::all()->paginate(4);
         return view('pages.support_team.dashboard', $events);
     }
 }

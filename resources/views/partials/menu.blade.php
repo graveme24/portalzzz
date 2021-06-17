@@ -60,7 +60,7 @@
 
                         <ul class="nav nav-group-sub" data-submenu-title="Manage Academics">
 
-                        {{--Timetables--}}
+                        {{-- Timetables--}}
                             <li class="nav-item"><a href="{{ route('tt.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['tt.index']) ? 'active' : '' }}">Timetables</a></li>
                         </ul>
                     </li>
@@ -98,7 +98,7 @@
                         <a href="#" class="nav-link"><i class="icon-users"></i> <span> Students</span></a>
 
                         <ul class="nav nav-group-sub" data-submenu-title="Manage Students">
-                            {{--Admit Student--}}
+                            {{-- Admit Student--}}
                             @if(Qs::userIsTeamSA())
                                 <li class="nav-item">
                                     <a href="{{ route('students.create') }}"
@@ -142,9 +142,9 @@
                     </li>
 
                     {{--Manage Classes--}}
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a href="{{ route('classes.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['classes.index','classes.edit']) ? 'active' : '' }}"><i class="icon-windows2"></i> <span> Classes</span></a>
-                    </li> --}}
+                    </li>
 
                     {{--Manage Dorms--}}
                     {{-- <li class="nav-item">
@@ -152,62 +152,62 @@
                     </li> --}}
 
                     {{--Manage Sections--}}
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a href="{{ route('sections.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['sections.index','sections.edit',]) ? 'active' : '' }}"><i class="icon-fence"></i> <span>Sections</span></a>
-                    </li> --}}
+                    </li>
 
                     {{--Manage Subjects--}}
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a href="{{ route('subjects.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['subjects.index','subjects.edit',]) ? 'active' : '' }}"><i class="icon-pin"></i> <span>Subjects</span></a>
-                    </li> --}}
+                    </li>
                 @endif
 
                 {{--Exam--}}
                 @if(Qs::userIsTeamSAT())
                     <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['exams.index', 'exams.edit', 'grades.index', 'grades.edit', 'marks.index', 'marks.manage', 'marks.bulk', 'marks.tabulation', 'marks.show', 'marks.batch_fix',]) ? 'nav-item-expanded nav-item-open' : '' }} ">
-                    {{-- <a href="#" class="nav-link"><i class="icon-books"></i> <span> Grades</span></a>
+                    <a href="#" class="nav-link"><i class="icon-books"></i> <span> Grades</span></a>
 
-                    <ul class="nav nav-group-sub" data-submenu-title="Manage Grades"> --}}
-                        {{-- @if(Qs::userIsTeamSA()) --}}
+                    <ul class="nav nav-group-sub" data-submenu-title="Manage Grades">
+                        @if(Qs::userIsTeamSA())
 
                         {{-- Exam list--}}
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="{{ route('exams.index') }}"
                                    class="nav-link {{ (Route::is('exams.index')) ? 'active' : '' }}">Periods</a>
-                            </li> --}}
+                            </li>
 
                             {{--Grades list--}}
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                     <a href="{{ route('grades.index') }}"
                                        class="nav-link {{ in_array(Route::currentRouteName(), ['grades.index', 'grades.edit']) ? 'active' : '' }}">Remarks</a>
-                            </li> --}}
+                            </li>
 
                             {{--Tabulation Sheet--}}
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="{{ route('marks.tabulation') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['marks.tabulation']) ? 'active' : '' }}">Tabulation Sheet</a>
-                            </li> --}}
+                            </li>
 
                             {{--Marks Batch Fix--}}
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="{{ route('marks.batch_fix') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['marks.batch_fix']) ? 'active' : '' }}">Marks Fix</a>
-                            </li> --}}
-                        {{-- @endif --}}
+                            </li>
+                        @endif
 
-                        {{-- @if(Qs::userIsTeamSAT()) --}}
+                        @if(Qs::userIsTeamSAT())
                             {{--Marks Manage--}}
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="{{ route('marks.index') }}"
                                    class="nav-link {{ in_array(Route::currentRouteName(), ['marks.index']) ? 'active' : '' }}">Marks</a>
-                            </li> --}}
+                            </li>
 
                             {{--Marksheet--}}
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="{{ route('marks.bulk') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['marks.bulk', 'marks.show']) ? 'active' : '' }}">Marksheet</a>
-                            </li> --}}
+                            </li>
 
-                            {{-- @endif --}}
+                            @endif
 
-                    {{-- </ul> --}}
+                    </ul>
                 </li>
                 @endif
 

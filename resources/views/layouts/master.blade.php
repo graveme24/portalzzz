@@ -16,6 +16,106 @@
     @include('partials.inc_top')
 </head>
 
+<style>
+
+section.upcoming-events {
+    display: flex;
+}
+
+section.upcoming-events .title {
+    margin-left: -10px;
+    color: white;
+    text-align: right;
+    display: inline-block;
+}
+
+section.upcoming-events .pagination {
+    text-align: right;
+    margin-top: -3px;
+}
+
+section.upcoming-events .headline {
+    margin: 0;
+}
+
+section.upcoming-events .btn {
+    margin: 0 10px;
+    color: #fff;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+section.upcoming-events .btn:hover,
+section.upcoming-events .btn:active {
+    color: #3caea3;
+}
+
+section.upcoming-events .card {
+    width: 180px;
+    height: 170px;
+    padding: 20px;
+    margin: 0 15px;
+    border-radius: 10px;
+
+    display: inline-block;
+    background: #193d81;
+}
+
+section.upcoming-events .card .date {
+    margin: 3px;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    font-weight: 800;
+    font-family: 'Open Sans', sans-serif;
+}
+
+section.upcoming-events .card .event {
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+}
+
+
+/* Responsiveness */
+
+@media screen and (max-width: 1023px) {
+    section.upcoming-events .title {
+        width: 170px;
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+    section.upcoming-events .card {
+        width: 130px;
+        height: 130px;
+        padding: 15px;
+        margin: 0 10px;
+    }
+    section.upcoming-events .card .date {
+        font-size: 20px;
+    }
+    section.upcoming-events .card .event {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    section.upcoming-events {
+        flex-wrap: wrap;
+        padding-right: 25px;
+        padding-left: 25px;
+    }
+    section.upcoming-events .card {
+        margin-bottom: 15px;
+    }
+}
+
+
+</style>
+
 <body class="{{ in_array(Route::currentRouteName(), ['payments.invoice', 'marks.tabulation', 'marks.show', 'ttr.manage', 'ttr.show']) ? 'sidebar-xs' : '' }}">
 
 @include('partials.top_menu')
@@ -192,6 +292,7 @@
                 right:'month,agendaWeek,agendaDay'
             },
             events:'/dashboard',
+            eventColor: '#2541b2',
             selectable:false,
             selectHelper: false,
             select:function(start, end, allDay)

@@ -189,14 +189,25 @@
                                         <option {{ (old('my_class_id') == $c->id ? 'selected' : '') }} value="{{ $c->id }}">{{ $c->name }}</option>
                                         @endforeach
                                 </select>
-                        </div>
                             </div>
+                        </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="section_id">Section: <span class="text-danger">*</span></label>
                                 <select data-placeholder="Select Class First" required name="section_id" id="section_id" class="select-search form-control">
                                     <option {{ (old('section_id')) ? 'selected' : '' }} value="{{ old('section_id') }}">{{ (old('section_id')) ? 'Selected' : '' }}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="mop_id">Mode of Payment<span class="text-danger">*</span></label>
+                                <select class="form-control select-search" name="mop_id" id="mop_id">
+                                    <option value="">All Types of Payment</option>
+                                    @foreach(App\Models\MopTypes::orderBy('id')->get() as $c)
+                                        <option {{ old('id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

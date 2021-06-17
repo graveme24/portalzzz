@@ -27,7 +27,7 @@
 
                             <div class="col-md-2 mt-4">
                                 <div class="text-right mt-1">
-                                    <button type="submit" class="btn btn-primary">Submit <i class="icon-paperplane ml-2"></i></button>
+                                    <button type="submit" class="btn btn-primary">Refresh Payments <i class="icon-paperplane ml-2"></i></button>
                                 </div>
                             </div>
 
@@ -52,7 +52,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Class Payments</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        @foreach(App\Models\MyClass::orderBy('id')->get() as $c)
+                        @foreach(App\Models\MyClass::orderBy('id')->get() as $mc)
                             <a href="#pc-{{ $mc->id }}" class="dropdown-item" data-toggle="tab">{{ $mc->name }}</a>
                         @endforeach
                     </div>
@@ -69,7 +69,6 @@
                                 <th>Amount</th>
                                 <th>Ref_No</th>
                                 <th>Class</th>
-                                <th>Method</th>
                                 <th>Info</th>
                                 <th>Action</th>
                             </tr>
@@ -82,8 +81,7 @@
                                     <td>{{ $p->amount }}</td>
                                     <td>{{ $p->ref_no }}</td>
                                     <td>{{ $p->my_class_id ? $p->my_class->name : '' }}</td>
-                                    <td>{{ ucwords($p->method) }}</td>
-                                    <td>{{ $p->description }}</td>
+                                    <td>{{ $p->mop->name }}</td>
                                     <td class="text-center">
                                         <div class="list-icons">
                                             <div class="dropdown">

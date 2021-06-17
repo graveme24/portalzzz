@@ -14,6 +14,7 @@ Route::get('get_class_sections/{class_id}', 'AjaxController@get_class_sections')
 //Route::get('/test', 'TestController@index')->name('test');
 Route::get('/privacy-policy', 'HomeController@privacy_policy')->name('privacy_policy');
 Route::get('/terms-of-use', 'HomeController@terms_of_use')->name('terms_of_use');
+Route::get('balances/{id}/{class?}', 'SupportTeam\PaymentController@balance')->name('student.balances');
 
 
 

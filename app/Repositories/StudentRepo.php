@@ -63,7 +63,6 @@ class StudentRepo {
     {
         return $this->getRecord(['user_id' => $st_id]);
     }
-
     public function getAll()
     {
         return $this->activeStudents()->with('user');

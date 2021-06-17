@@ -84,12 +84,38 @@
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h5 class="card-title">School Events</h5>
+
+            <h2 class="headline">Upcoming Events</h2>
          {!! Qs::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
-            <div id=''></div>
+
+            @if(count($events) > 0)
+            <section class="section upcoming-events">
+              <div class="title">
+                @if(count($events) > 4)
+                <div class="pagination" style="text-align: right;
+                margin-top: -3px;">
+                  <button class="btn btn-left">
+                    <i class="fa fa-3x fa-angle-left"></i>
+                  </button>
+                  <button class="btn btn-right">
+                    <i class="fa fa-3x fa-angle-right"></i>
+                  </button>
+                </div>
+                @endif
+              </div>
+              @foreach ($events as $event)
+              <div class="card">
+                <h3 class="date">{{ $event->getEventDate() }}</h3>
+                <p class="event">{{ $event->title }}</p>
+              </div>
+              @endforeach
+
+            </section>
+            @endif
+
         </div>
 
     </div>

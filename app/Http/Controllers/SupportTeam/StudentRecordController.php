@@ -20,6 +20,7 @@ use App\Mail\TestMail;
 use App\Models\StudentRecord;
 use Chatify\Facades\ChatifyMessenger as Chatify;
 use App\User;
+Use Illuminate\Http\Request;
 
 class StudentRecordController extends Controller
 {
@@ -51,26 +52,23 @@ class StudentRecordController extends Controller
         $tr = $this->user->find(['id' => $id])->first();
         $yr = now()->year;
         $adm = $yr.'-'.mt_rand(10000, 99999);
-
-        if ($sr->status == '1')
-            $sr->status = '0';
-        else if ($sr->status  == '0')
-            if ($sr->adm_no = $sr->adm_no)
-                $sr->status = '1' and
-                $sr->adm_no = $sr->adm_no;
-            else
-                $sr->status = '1'and
-                $sr->adm_no = $adm;
         $mail =$tr->email;
-
         $details = [
             'title' => 'Mail from Haven of Wisdom',
             'body' => 'Kindly login using your email with your password as: student',
         ];
-
-        Mail::to($mail)->send(new TestMail($details));
+        if ($sr->status == '1')
+            $sr->status = '0';
+        else if ($sr->status  == '0')
+                if ($sr->adm_no = $sr->adm_no)
+                    $sr->status = '1' and
+                    $sr->adm_no = $sr->adm_no and
+                    Mail::to($mail)->send(new TestMail($details));
+                else
+                    $sr->status = '1'and
+                    $sr->adm_no = $adm and
+                    Mail::to($mail)->send(new TestMail($details));
         $sr->save();
-
         return back()->with('success','Activated Succesfully');
     }
     public function toapprove()
@@ -145,16 +143,18 @@ class StudentRecordController extends Controller
             'title' => 'Mail from Haven of Wisdom - Alapan',
             'body' => 'You may now login to your account, the default password is: "student".',
         ];
-        // Mail::to($mail)->send(new TestMail($details));
+        Mail::to($mail)->send(new TestMail($details));
         $status = "1";
         $user = $this->user->create($data); // Create User
 
         $sr['adm_no'] = $data['username'];
+        $srec['mop_id'] = ($req->mop_id);
         $sr['user_id'] = $user->id;
         $sr['status'] = "1";
         $sr['session'] = Qs::getSetting('current_session');
 
-        $this->student->createRecord($sr); // Create Student
+        $this->student->createRecord($sr);// Create Student
+
         return Qs::jsonStoreOk();
     }
 
@@ -235,19 +235,17 @@ class StudentRecordController extends Controller
         $d['email'] = ($req->email);
         $uname = $d['year_admitted'].'-'.mt_rand(10000, 99999);
 
-        // if($req->hasFile('photo')) {
-        //     $photo = $req->file('photo');
-        //     $f = Qs::getFileMetaData($photo);
-        //     $f['name'] = 'photo.' . $f['ext'];
-        //     $f['path'] = $photo->storeAs(Qs::getUploadPath('student').$sr->user->code, $f['name']);
-        //     $d['photo'] = asset('storage/' . $f['path']);
-        // }
-
-
+        if($req->hasFile('photo')) {
+            $photo = $req->file('photo');
+            $f = Qs::getFileMetaData($photo);
+            $f['name'] = 'photo.' . $f['ext'];
+            $f['path'] = $photo->storeAs(Qs::getUploadPath('student').$sr->user->code, $f['name']);
+            $d['photo'] = asset('storage/' . $f['path']);
+        }
         $this->user->update($sr->user->id, $d); // Update User Details
 
         $srec = $req->only(Qs::getStudentData());
-
+        $srec['mop_id'] = ($req->mop_id);
         // $srec['adm_no'] = $uname;
         $srec['session'] = Qs::getSetting('current_session');
 
@@ -271,5 +269,6 @@ class StudentRecordController extends Controller
 
         return back()->with('flash_success', __('msg.del_ok'));
     }
+
 
 }

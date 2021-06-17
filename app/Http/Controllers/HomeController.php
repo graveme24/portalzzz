@@ -52,7 +52,10 @@ class HomeController extends Controller
             $d['users'] = $this->user->getAll();
         }
 
-        return view('pages.support_team.dashboard', $d);
+        $events = Event::all();
+
+
+        return view('pages.support_team.dashboard', $d)->with('events',$events);
     }
 
 
